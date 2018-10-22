@@ -1,0 +1,6 @@
+node_modules/
+*.pyc
+mysqlconnection.py
+uploaded_files/
+*.epgz
+*.mwb

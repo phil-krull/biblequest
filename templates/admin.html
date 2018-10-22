@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Band Template</title>
+    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+    <!-- Bulma Version 0.7.1-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
+</head>
+
+<body>
+    <section class="hero">
+        <div class="container">
+            <h3>Upload file</h3>
+            <form action="/uploadFile" method="post" enctype="multipart/form-data">
+                
+                <div class="field">
+                    <label for="file" class="label">Enter a file</label>
+                    <div class="control">
+                        <input id="file" name="file" class="input" type="file">
+                    </div>
+                </div>
+                
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+</body>
+
+</html>
