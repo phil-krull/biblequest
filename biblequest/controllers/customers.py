@@ -1,5 +1,8 @@
 from biblequest.config.mysqlconnection import connectToMySQL
-from flask import render_template
+from flask import render_template, redirect
+from biblequest.models.customer import Customer
+
+customer = Customer()
 
 
 class Customers():
@@ -17,11 +20,24 @@ class Customers():
     def register(self):
         pass
 
-    def registerCustomer(self):
-        pass
+    def register_customer(self, form_data):
+        response = customer.validate_user(form_data)
 
-    def login(self):
-        pass
+        return redirect('/')
+
+    def login_customer(self, form_data):
+        user = customer.get_user_by_email(form_data['email'])
+        if user == []:
+            return redirect('/')
+        else:
+            valid_login = customer.verify_password(user[0]['password'], form_data['password'])
+            if valid_login:
+                if user[0]['role_id'] == 1:
+                    return redirect('/admin')
+                else:
+                    return redirect('/users')
+            else:
+                return redirect('/')
 
     def email(self):
         pass
