@@ -70,6 +70,10 @@ def register_customer():
 def login_customer():
     return customers.login_customer(request.form)
 
+@app.route('/logout', methods=['post'])
+def logout_customer():
+    return customers.logout()
+
 
 # -------------------------------------------------------- admin routes --------------------------------------------------------
 @app.route('/admin')
@@ -130,3 +134,7 @@ def upload_file():
     # return redirect('/admin')
     return admins.upload_file(request.form)
 
+# -------------------------------------------------------- customer with code routes --------------------------------------------------------
+@app.route('/enterCode', methods=['POST'])
+def product_code():
+    return codes.get_product(request.form['acode'])

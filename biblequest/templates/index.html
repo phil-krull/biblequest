@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bible Quest</title>
-    <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon"> -->
     <!-- Bulma Version 0.7.1-->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" /> -->
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style/css/mystyles.css') }}"> -->
@@ -14,56 +14,46 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/css/index.css') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
     <!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
-    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </head>
-
+<!-- ---------------------------------------------- start of nav bar ---------------------------------------------- -->
 <body>
-    <nav class="navbar is-dark">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
-                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png') }}" alt="Bulma: a modern CSS framework based on Flexbox">
+                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png') }}" alt="Bible Quest">
             </a>
             <!-- make drop down menu for mobile -->
             <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span><a class="nav-item is-tab is-hidden-mobile is-active">Home</a></span>
+                <span><a class="nav-item is-tab is-hidden-mobile is-active  has-text-white">Home</a></span>
                 <span><a class="nav-item is-tab is-hidden-mobile">Features</a></span>
                 <span><a class="nav-item is-tab is-hidden-mobile">Pricing</a></span>
                 <span><a class="nav-item is-tab is-hidden-mobile">About</a></span>
             </div>
         </div>
-
+        
         <div id="navbarExampleTransparentExample" class="navbar-menu">
             <div class="navbar-start">
                 <a class="navbar-item" href="#home">
                     Home
                 </a>
-                <!-- <a class="navbar-item" href="#account">
-                    Account
-                </a> -->
-                <!-- <a class="navbar-item" href="/register">
-                    Account
-                </a> -->
                 <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
                 <a class="navbar-item trigger_popup_fricc">Register/Login</a>
-
-                <div class="hover_bkgr_fricc">
+                
+                <div class="hover_bkgr_register">
                     <span class="helper"></span>
                     <div>
-                        <div class="popupCloseButton">X</div>
-                        <!-- <p>Add any HTML content<br />inside the popup box!</p> -->
-                        <form action="/registerCustomer" method="post">
+                        <form id="register" action="/registerCustomer" method="post">
                             <div class="field">
-                                <label for="name" class="label">Name</label>
+                                <label for="registerName" class="label">Name</label>
                                 <div class="control">
-                                    <input id="name" name="name" class="input" type="text" placeholder="Name">
+                                    <input id="registerName" name="rname" class="input" type="text" placeholder="Name">
                                 </div>
                             </div>
                             
                             <div class="field">
-                                <label for="email" class="label">Email</label>
+                                <label for="registerEmail" class="label">Email</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <input id="email" name="email" class="input" type="email" placeholder="Email">
+                                    <input id="registerEmail" name="remail" class="input" type="email" placeholder="Email">
                                     <span class="icon is-small is-left">
                                         <i class="fas fa-envelope"></i>
                                     </span>
@@ -71,48 +61,69 @@
                                         <i class="fas fa-exclamation-triangle"></i>
                                     </span>
                                 </div>
-                                <!-- <p class="help is-danger">This email is invalid</p> -->
                             </div>
                             
                             <div class="field">
-                                <label for="phone_number" class="label">Phone Number</label>
+                                <label for="registerPhoneNumber" class="label">Phone Number</label>
                                 <div class="control">
-                                    <input id="phone_number" name="phone_number" class="input" type="text" placeholder="Phone Number">
+                                    <input id="registerPhoneNumber" name="rphone_number" class="input" type="text" placeholder="xxx-xxx-xxxx">
                                 </div>
                             </div>
                             
                             <div class="field">
-                                <label for="address" class="label">Address</label>
+                                <label for="registerAddress" class="label">Address</label>
                                 <div class="control">
-                                    <input id="address" name="address" class="input" type="text" placeholder="Possibilly move to another form">
+                                    <input id="registerAddress" name="raddress" class="input" type="text" placeholder="Address">
                                 </div>
                             </div>
                             
                             <div class="field">
-                                <label for="password" class="label">Password</label>
+                                <label for="registercity" class="label">City</label>
                                 <div class="control">
-                                    <input id="password" name="password" class="input" type="password" placeholder="Password">
+                                    <input id="registercity" name="rcity" class="input" type="text" placeholder="Possibilly move to another form">
                                 </div>
                             </div>
                             
-                            <div class="field">
-                                <label for="confirm_password" class="label">Confirm Password</label>
-                                <div class="control">
-                                    <input id="confirm_password" name="confirm_password" class="input" type="password" placeholder="Please re-enter password">
-                                </div>
-                            </div>
-                            
-                            <div class="field">
-                                <label for="role" class="label">Current Role</label>
-                                <div class="control">
-                                    <div class="select">
-                                        <select id="role" name="role_id">
-                                            <option selected disabled>Select current role?</option>
-                                            {% for role in roles %}
-                                            <option value={{ role.role_id }}>{{ role.type }}</option>
-                                            {% endfor %}
+                            <div class="columns">
+                                <div class="field column is-one-thirds">
+                                    <label for="registerState" class="label">State</label>
+                                    <div class="control">
+                                        <select id="registerState" name="rstate" class="input">
                                         </select>
                                     </div>
+                                </div>
+                                
+                                <div class="field column is-one-thirds">
+                                    <label for="registerZip" class="label">Zip Code</label>
+                                    <div class="control">
+                                        <input id="registerZip" name="rzip" class="input" type="number" placeholder="Zip Code">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerPassword" class="label">Password</label>
+                                <div class="control">
+                                    <input value="Password1!" id="registerPassword" name="rpassword" class="input" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerConfirm_password" class="label">Confirm Password</label>
+                                <div class="control">
+                                    <input value="Password1!" id="registerConfirm_password" name="rconfirm_password" class="input" type="password" placeholder="Please re-enter password">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerPurpose" class="label">How will you use our product?</label>
+                                <div class="control">
+                                    <select id="registerPurpose" name="rpurpose" class="input">
+                                        <option selected disabled>Choose an option</option>
+                                        <option value="1">Home</option>
+                                        <option value="2">Church</option>
+                                        <option value="3">Other</option>
+                                    </select>
                                 </div>
                             </div>
                             
@@ -120,14 +131,66 @@
                                 <div class="control">
                                     <button class="button is-link">Register</button>
                                 </div>
-                                <div class="control">
-                                    <a href="/" class="button is-text">Cancel</a>
-                                </div>
                             </div>
+                            
                         </form>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="popupCancel button is-link is-inverted">Cancel</button>
+                            </div>
+                            <div class="control">
+                                <button class="popupLogin button is-link is-inverted">Already Registered.....Login.....</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- ----------------------- End Code for Link to Register/Login via Popup window -----------------------  -->
+                <!-- ----------------------- End Code for Link to Register via Popup window -----------------------  -->
+                <!-- ----------------------- Code for Link to Login via Popup window -----------------------  -->
+                <div class="hover_bkgr_login">
+                    <span class="helper"></span>
+                    <div>
+                        <!-- <div class="popupCloseButton">X</div> -->
+                        <!-- <p>Add any HTML content<br />inside the popup box!</p> -->
+                        <form id="login" action="/loginCustomer" method="post">
+                            <div class="field">
+                                <label for="loginEmail" class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input id="loginEmail" name="lemail" class="input" type="email" placeholder="Email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="loginPassword" class="label">Password</label>
+                                <div class="control">
+                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
+                                    <input value="Password1!" id="loginPassword" name="lpassword" class="input" type="password" placeholder="Password">
+                                </div>
+                            </div>
+                            
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link">Login</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="popupCancel button is-link is-inverted">Cancel</button>
+                            </div>
+                            <div class="control">
+                                <button class="popupRegister button is-link is-inverted">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ----------------------- End Code for Link to Login via Popup window -----------------------  -->
                 <a class="navbar-item" href="#products">
                     Products
                 </a>
@@ -140,419 +203,304 @@
                 <a class="navbar-item" href="https://biblequest.webs.com/faq" target="_blank">
                     FAQ
                 </a>
-                <!-- <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="/documentation/overview/start/">
-                        More
-                    </a>
-                    <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="/documentation/overview/start/">
-                            Mechandise
-                        </a>
-                        <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-                            Extras
-                        </a>
-                        <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-                            Media
-                        </a>
-                    </div>
-                </div> -->
+                <a class="navbar-item logout">
+                    Logout
+                </a>
             </div>
-
-            <!-- <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="field">
-                        <div class="control">
-                            <input class="input" type="text" placeholder="search . . .">
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </nav>
-
+<!-- ---------------------------------------------- end of nav bar ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of hero section ---------------------------------------------- -->
     <section class="hero">
         <figure class="image">
             <!-- <img src="https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
         </figure>
     </section>
-
+<!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of home section ---------------------------------------------- -->
     <section id="home" class="section">
         <div class="container has-text-centered">
-            <h2 class="title is-size-1 has-text-weight-semibold has-text-black">Bible Quest</h2>
-            <h3 class="subtitle has-text-black has-text-weight-semibold is-size-4">Bible Quest empowers parents to teach their children to use God's Word as the FOUNDATION for their thought process! Here's how:</h3>
+            <h2 class="title is-size-1 has-text-weight-semibold has-text-white">Bible Quest</h2>
+            <h3 class="subtitle has-text-white has-text-weight-semibold is-size-4">Bible Quest empowers parents to teach their children to use God's Word as the FOUNDATION for their thought process!</h3>
             <div class="columns is-centered">
-                <div class="content has-text-left column is-three-quarters has-text-black has-text-weight-semibold">
+                <div class="content has-text-left column is-three-quarters has-text-white has-text-weight-semibold">
                     <ul>
-                        <li>We EQUIP all learners with knowledge through memorization.
+                        <li>EQUIP all learners with knowledge through memorization.
                             <ul>
-                                <li>The Big Bible Story Song makes Biblical chronology into an easy, memorized reference.</li>
-                                <li>Simple facts about key Bible personalities help kids know who God was working with. </li>
-                                <li>Easy-to-remember verse songs with the included CD keeps God’s Word in kids' memories.</li>
-                                <li>Maps of important places in the Bible help reinforce the historical reality of the Biblical accounts.</li>
+                                <li>Verses set to music and the Big Bible Story Song help kids remember Scripture and Biblical chronology.</li>
+                                <li>Simple facts about people in the Bible underscore God's interactions with them.</li>
+                                <li>Maps of important places reinforce the historical reality of the Biblical accounts.</li>
                             </ul>
                         </li>
-                        <li>We EMPOWER older students with Explorations and Exercises to empower their Biblical understanding.</li>
-                        <li>EXPEDITIONS and deeper questions bring intense discussion and wisdom development for teens and advanced learners.</li>
-                        <li>Two, separate 40-Week editions (Old Testament and New Testament) provide a total of two years of material.</li>
+                        <li>EMPOWER older students with Explorations and Exercises to enhance Biblical understanding.</li>
+                        <li>EXPEDITIONS focus on wisdom development for teens and advanced learners.</li>
                     </ul>
-                    <button class="button is-primary">Test</button>
                 </div>
             </div>
             <div class="columns" style="padding: 2rem">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-2by1">
-                                <img src="{{ url_for('static', filename='images/EquipWebsite2018.jpg')}}" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content border-dark">
-                            <!-- <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <p class="subtitle is-6">@johnsmith</p>
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-2by1">
+                                    <img src="{{ url_for('static', filename='images/new_images/EquipWebsite2018.png')}}" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content border-dark">
+                                <!-- <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">John Smith</p>
+                                        <p class="subtitle is-6">@johnsmith</p>
+                                    </div>
+                                </div> -->
+                                
+                                <div class="content">
+                                    The Equip Phase builds biblical knowledge through memorization. Maximize and master memorized content with active, visual, and audio elements!
                                 </div>
-                            </div> -->
-
-                            <div class="content">
-                                The Equip Phase builds biblical knowledge through memorization. Maximize and master memorized content with active, visual, and audio elements!
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-2by1">
-                                <img src="{{ url_for('static', filename='images/EmpowerWebsite2018.jpg')}}" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <!-- <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <p class="subtitle is-6">@johnsmith</p>
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-2by1">
+                                    <img src="{{ url_for('static', filename='images/new_images/EmpowerWebsite2018.png')}}" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <!-- <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4">John Smith</p>
+                                        <p class="subtitle is-6">@johnsmith</p>
+                                    </div>
+                                </div> -->
+                                
+                                <div class="content">
+                                    The Empower Phase aims to develop student understanding through Explorations and Exercises. Explorations involve questions and activities that help students think Biblically. Exercises provide practice using Biblical information with speed and accuracy.
                                 </div>
-                            </div> -->
-
-                            <div class="content">
-                                The Empower Phase aims to develop student understanding through Explorations and Exercises. Explorations involve questions and activities that help students think Biblically. Exercises provide practice using Biblical information with speed and accuracy.
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-2by1">
-                                <img src="{{ url_for('static', filename='images/ExpeditionWebsite2018.jpg')}}" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <!-- <div class="media">
-                                <div class="media-content">
+                    <div class="column">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-2by1">
+                                    <img src="{{ url_for('static', filename='images/new_images/ExpeditionWebsite2018.png')}}" alt="Placeholder image">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <!-- <div class="media-content">
                                     <p class="title is-4">John Smith</p>
                                     <p class="subtitle is-6">@johnsmith</p>
+                                </div> -->
+                                <div class="content">
+                                    Expeditions help students of the Bible to use what they know and understand to communicate biblical truth to others. By engaging with Biblical truth under the guidance of a mentor, students develop biblical wisdom.
                                 </div>
-                            </div> -->
-
-                            <div class="content">
-                                Expeditions help students of the Bible to use what they know and understand to communicate biblical truth to others. By engaging with Biblical truth under the guidance of a mentor, students develop biblical wisdom.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
     </section>
-
+<!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
     <section id="account" class="section">
         <div class="container has-text-centered">
-            <h2 class="title">Account</h2>
-            <p>This will be either login/registration or current files</p>
-            <!-- <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
+            <h2 class="title has-text-white">Account</h2>
+            <!-- <h4 class='subtitle has-text-white'>Enter a code</h4> -->
+            <form class="addUserProduct" action="/enterCode">
+                <div class="field">
+                    <label for="productCode" class="label has-text-white">Enter Product Code</label>
+                    <div class="control">
+                        <input id="productCode" class="input" name='acode' type="text" placeholder="code">
+                    </div>
                 </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
+                <div class="control">
+                    <button class="button is-primary">Submit</button>
                 </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-            </div> -->
-
-            <!-- <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-            </div> -->
+            </form>
+            <h4 class='subtitle has-text-white'>Your products</h4>
+            <div class="tile is-ancestor user_products">
+            </div>
         </div>
     </section>
-
+<!-- ---------------------------------------------- end of home ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of products section ---------------------------------------------- -->
     <section id="products" class="section">
         <div class="container has-text-centered">
-            <h2 class="title">Products</h2>
-
+            <h2 class="title has-text-white">Products</h2>
+            
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="church edition">
-                        </figure>
-                        <p class="title">Church Edition</p>
-                        <p class="subtitle">Bible Quest 2-Year Curriculum</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/7716297" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="church edition">
+                            </figure>
+                            <p class="title">Church Edition</p>
+                            <p class="subtitle">Bible Quest 2-Year Curriculum</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/7716297" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="deluxe kit">
-                        </figure>
-                        <p class="title">Deluxe Edition</p>
-                        <p class="subtitle">Bible Quest Curriculum Deluxe Old Testament & New Testament Set</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/6818889" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="deluxe kit">
+                            </figure>
+                            <p class="title">Deluxe Edition</p>
+                            <p class="subtitle">Bible Quest Curriculum Deluxe Old Testament & New Testament Set</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6818889" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/WebProductNT2018.png')}}" alt="new testament kit">
-                        </figure>
-                        <p class="title">New Testament Kit</p>
-                        <p class="subtitle">Bible Quest Curriculum NT Set</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/5956859" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/WebProductNT2018Thumb.png')}}" alt="new testament kit">
+                            </figure>
+                            <p class="title">New Testament Kit</p>
+                            <p class="subtitle">Bible Quest Curriculum NT Set</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/5956859" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/WebProductOT2018.png')}}" alt="old testament kit">
-                        </figure>
-                        <p class="title">Old Testament Kit</p>
-                        <p class="subtitle">Bible Quest Curriculum OT Set</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/5956856" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/WebProductOT2018Thumb.png')}}" alt="old testament kit">
+                            </figure>
+                            <p class="title">Old Testament Kit</p>
+                            <p class="subtitle">Bible Quest Curriculum OT Set</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/5956856" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/FrontCoverDraft.jpg')}}" alt="david's mighty men">
-                        </figure>
-                        <p class="title">David's Mighty Men</p>
-                        <p class="subtitle">Pick Your Path Adventure! David's Mighty Men: Danger in Hebron</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/6794399" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/FrontCoverDraft.jpg')}}" alt="david's mighty men">
+                            </figure>
+                            <p class="title">David's Mighty Men</p>
+                            <p class="subtitle">Pick Your Path Adventure! David's Mighty Men: Danger in Hebron</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6794399" target="_blank">Purchase</a>
                     </article>
                 </div>
             </div>
-
+            
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/EmpowerWebsite2018.jpg')}}" alt="bible girls party">
-                        </figure>
-                        <p class="title">Bible Girls Party</p>
-                        <p class="subtitle">Pick Your Path Adventure! Bible Girls Party: Esther's Maidens</p>
-                        <a class="button" href="https://biblequest.webs.com/apps/webstore/products/show/6794404" target="_blank">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/BibleGirlsParty.jpg')}}" alt="bible girls party">
+                            </figure>
+                            <p class="title">Bible Girls Party</p>
+                            <p class="subtitle">Pick Your Path Adventure! Bible Girls Party: Esther's Maidens</p>
+                        </div>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6794404" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/NTCD.png')}}" alt="new testament cd">
-                        </figure>
-                        <p class="title">New Testament CD</p>
-                        <p class="subtitle">Coming soon</p>
-                        <a class="button">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/NTCD.png')}}" alt="new testament cd">
+                            </figure>
+                            <p class="title">New Testament CD</p>
+                            <p class="subtitle">Coming soon</p>
+                        </div>
+                        <a class="button button_color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/OTCD.png')}}" alt="old testament cd">
-                        </figure>
-                        <p class="title">New Testament CD</p>
-                        <p class="subtitle">Coming soon</p>
-                        <a class="button">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/OTCD.png')}}" alt="old testament cd">
+                            </figure>
+                            <p class="title">New Testament CD</p>
+                            <p class="subtitle">Coming soon</p>
+                        </div>
+                        <a class="button button_color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/NewTestamentcarddeck2018.png')}}" alt="new testemant card deck">
-                        </figure>
-                        <p class="title">New Testament Card Deck</p>
-                        <p class="subtitle">Coming soon</p>
-                        <a class="button">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/NewTestamentcarddeck2018.png')}}" alt="new testemant card deck">
+                            </figure>
+                            <p class="title">New Testament Card Deck</p>
+                            <p class="subtitle">Coming soon</p>
+                        </div>
+                        <a class="button button_color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/OldTestamentcarddeck2018.png')}}" alt="old testemant card deck">
-                        </figure>
-                        <p class="title">Old Testament Card Deck</p>
-                        <p class="subtitle">Coming soon</p>
-                        <a class="button">Purchase</a>
+                        <div class="button_center">
+                            <figure class="image">
+                                <img src="{{ url_for('static', filename='images/new_new_images/OldTestamentcarddeck2018.png')}}" alt="old testemant card deck">
+                            </figure>
+                            <p class="title">Old Testament Card Deck</p>
+                            <p class="subtitle">Coming soon</p>
+                        </div>
+                        <a class="button button_color">Purchase</a>
                     </article>
                 </div>
             </div>
         </div>
     </section>
-
+<!-- ---------------------------------------------- end of products ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of resources section ---------------------------------------------- -->
     <section id="resources" class="section">
         <div class="container has-text-centered">
-            <h2 class="title">Resources/Community</h2>
+            <h2 class="title has-text-white">Resources/Community</h2>
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                            <img src="{{ url_for('static', filename='images/new_images/BlogIcon2.png')}}" alt="">
                         </figure>
                         <p class="title">Blog</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button" href="https://biblequest.webs.com/apps/blog/" target="_blank">Go</a>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/blog/" target="_blank">Go</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                            <img src="{{ url_for('static', filename='images/new_images/ForumIcon.png')}}" alt="">
                         </figure>
                         <p class="title">Forums</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button" href="https://biblequest.webs.com/apps/forums/" target="_blank">Go</a>
+                        <a class="button button_color" href="https://biblequest.webs.com/apps/forums/" target="_blank">Go</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                            <img src="{{ url_for('static', filename='images/new_images/StoreIcon.png')}}" alt="">
                         </figure>
                         <p class="title">Videos</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button" href="https://biblequest.webs.com/videos" target="_blank">Go</a>
+                        <a class="button button_color" href="https://biblequest.webs.com/videos" target="_blank">Go</a>
                     </article>
                 </div>
-                <!-- <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                        </figure>
-                        <p class="title">New York</p>
-                        <p class="subtitle">Fri 27 Nov 2016</p>
-                        <a class="button">Buy Tickets</a>
-                    </article>
-                </div> -->
             </div>
         </div>
     </section>
-
+<!-- ---------------------------------------------- end of products ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of contact section ---------------------------------------------- -->
     <section id="contact" class="section columns">
         <div class="container has-text-centered column is-10 is-offset-1">
-            <h2 class="title">Contact</h2>
-
+            <h2 class="title has-text-white">Contact</h2>
+            
             <form action="email" method="post">
                 <div class="field is-horizontal">
                     <div class="field-body">
@@ -574,7 +522,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="field is-horizontal">
                     <div class="field-body">
                         <div class="field">
@@ -584,7 +532,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="field is-horizontal">
                     <div class="field-body">
                         <div class="field">
@@ -599,7 +547,8 @@
             </form>
         </div>
     </section>
-
+<!-- ---------------------------------------------- end of contact ---------------------------------------------- -->
+<!-- ---------------------------------------------- start of footer ---------------------------------------------- -->
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
@@ -607,33 +556,17 @@
                     <a href="https://www.facebook.com/biblequestcbc/" target="_blank">
                         <i class="fab fa-facebook-square fa-2x"></i>
                     </a>
-                    <!-- <a href="">
-                        <i class="fab fa-twitter-square fa-2x"></i>
-                    </a> -->
-                </p>
-                <p>
-                    <a href="https://bulma.io" target="_blank">
-                        <img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
-                    </a>
                 </p>
             </div>
         </div>
     </footer>
-    <!-- <script src="../js/bulma.js"></script> -->
+    <!-- ---------------------------------------------- end of footer ---------------------------------------------- -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validate-additional.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 
 </html>
 
-
-
-
-
-
-<!-- new content to add
-Bible Quest empowers parents to teach their children to use God's Word as the FOUNDATION for their thought process!
-EQUIP all learners with knowledge through memorization.
-    Verses set to music and the Big Bible Story Song help kids remember Scripture and Biblical chronology.
-    Simple facts about people in the Bible underscore God's interactions with them. 
-    Maps of important places reinforce the historical reality of the Biblical accounts.
-EMPOWER older students with Explorations and Exercises to enhance Biblical understanding. 
-EXPEDITIONS focus on wisdom development for teens and advanced learners. -->
