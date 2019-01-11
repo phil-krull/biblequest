@@ -74,6 +74,10 @@ def login_customer():
 def logout_customer():
     return customers.logout()
 
+@app.route('/customer')
+def customer_checker():
+    return customers.users_page()
+
 
 # -------------------------------------------------------- admin routes --------------------------------------------------------
 @app.route('/admin')

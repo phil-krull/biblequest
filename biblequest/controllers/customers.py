@@ -70,7 +70,11 @@ class Customers():
         pass
 
     def users_page(self):
-        pass
+        if 'user_id' in session:
+            user_products = code.get_user_products(session['user_id'])
+            return jsonify({'status': True, 'message': 'Is user', 'products': user_products})
+        else:
+            return jsonify({'status': False})
 
     def logout(self):
         session.clear()

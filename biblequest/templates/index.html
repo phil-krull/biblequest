@@ -24,10 +24,9 @@
             </a>
             <!-- make drop down menu for mobile -->
             <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span><a class="nav-item is-tab is-hidden-mobile is-active  has-text-white">Home</a></span>
-                <span><a class="nav-item is-tab is-hidden-mobile">Features</a></span>
-                <span><a class="nav-item is-tab is-hidden-mobile">Pricing</a></span>
-                <span><a class="nav-item is-tab is-hidden-mobile">About</a></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
         
@@ -37,7 +36,7 @@
                     Home
                 </a>
                 <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
-                <a class="navbar-item trigger_popup_fricc">Register/Login</a>
+                <a class="navbar-item trigger_popup_fricc">Account</a>
                 
                 <div class="hover_bkgr_register">
                     <span class="helper"></span>
@@ -203,7 +202,7 @@
                 <a class="navbar-item" href="https://biblequest.webs.com/faq" target="_blank">
                     FAQ
                 </a>
-                <a class="navbar-item logout">
+                <a class="navbar-item logout is-hidden">
                     Logout
                 </a>
             </div>
@@ -303,7 +302,7 @@
     </section>
 <!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
-    <section id="account" class="section">
+    <section id="account" class="section is-hidden">
         <div class="container has-text-centered">
             <h2 class="title has-text-white">Account</h2>
             <!-- <h4 class='subtitle has-text-white'>Enter a code</h4> -->
@@ -464,7 +463,7 @@
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
+                        <figure class="image box is-paddingless">
                             <img src="{{ url_for('static', filename='images/new_images/BlogIcon2.png')}}" alt="">
                         </figure>
                         <p class="title">Blog</p>
@@ -474,7 +473,7 @@
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
+                        <figure class="image box is-paddingless">
                             <img src="{{ url_for('static', filename='images/new_images/ForumIcon.png')}}" alt="">
                         </figure>
                         <p class="title">Forums</p>
@@ -484,8 +483,8 @@
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <figure class="image">
-                            <img src="{{ url_for('static', filename='images/new_images/StoreIcon.png')}}" alt="">
+                        <figure class="image box is-paddingless">
+                            <img src="{{ url_for('static', filename='images/VideoIcon.png')}}" alt="">
                         </figure>
                         <p class="title">Videos</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->

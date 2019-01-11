@@ -1,4 +1,30 @@
+
 $(window).on('load', function () {
+    $.ajax({
+        method: 'get',
+        dataType: 'json',
+        url: '/customer',
+        success: function(data){
+            if(data.status) {
+                userView(data.products);
+            }
+        }
+    });
+
+    $(".navbar-burger").click(function() {
+        toggleBurger();
+    });
+    
+    $('.navbar-item:not(.trigger_popup_fricc)').click(function(){
+        toggleBurger();
+    })
+    
+    function toggleBurger() {
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+    }
+
     $(".trigger_popup_fricc").click(function(){
        $('.hover_bkgr_register').show();
     });
@@ -21,9 +47,7 @@ $(window).on('load', function () {
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').show();
     });
-    // need to hide this on page load
-    $('#account').hide();
-    $('.logout').hide();
+
 
     let loginValidation = $('#login').validate({
         rules: {
@@ -154,14 +178,14 @@ $(window).on('load', function () {
             data: $(this).serialize(),
             dataType: 'json',
             url: '/registerCustomer',
-            success: (res)=>{
-                console.log('success response', res);
+            success: (data)=>{
+                console.log('success response', data);
                 registerValidation.resetForm();
                 $(this).closest('form')[0].reset();
                 userView();
             },
-            error: (res)=>{
-                console.log('error response', res);
+            error: (data)=>{
+                console.log('error response', data);
                 $('#registerEmail').after(`<p class='help is-danger product_error'>${res.responseJSON.message}</p>`);
             }
         })
@@ -176,14 +200,14 @@ $(window).on('load', function () {
             data: $(this).serialize(),
             dataType: 'json',
             url: '/loginCustomer',
-            success: (res)=>{
-                console.log('success response', res);
+            success: (data)=>{
                 loginValidation.resetForm();
                 $(this).closest('form')[0].reset();
-                userView(res.products);
+                userView(data.products);
+                toggleBurger();
             },
-            error: (res)=>{
-                console.log('error response', res);
+            error: (data)=>{
+                console.log('error response', data);
             }
         })
     })
@@ -199,7 +223,7 @@ $(window).on('load', function () {
                 responseType: 'blob'
             },
             success: (data)=>{
-                console.log(data);
+                console.log('success data: ', data);
                 var a = document.createElement('a');
                 var url = window.URL.createObjectURL(data);
                 a.href = url;
@@ -212,8 +236,8 @@ $(window).on('load', function () {
                 $('.product_error').hide();
                 addUserProduct.resetForm();
             },
-            error: (res)=>{
-                console.log('error response', res);
+            error: (data)=>{
+                console.log('error response: ', data);
                 // add error message to form
                 if($('.product_error').length < 1) {
                     $('#productCode').after(`<p class='help is-danger product_error'>Please enter a valid Product code</p>`);
@@ -228,15 +252,15 @@ $(window).on('load', function () {
             method: 'POST',
             success: (data)=>{
                 console.log(data);
-                $('.logout').hide();
+                $('.logout').addClass('is-hidden');
+                $('#account').addClass('is-hidden');
                 $('.user_products').html('');
-                $('#account').hide();
                 // $('.navbar-start a:nth-of-type(2)').on('click');
                 $('.navbar-start a:nth-of-type(2)').addClass('trigger_popup_fricc');
                 $(".trigger_popup_fricc").click(function(){
                     $('.hover_bkgr_register').show();
                  });
-                $('.navbar-start a:nth-of-type(2)').html('Register/Login');
+                // $('.navbar-start a:nth-of-type(2)').html('Register/Login');
                 $('.navbar-start a:nth-of-type(2)').removeAttr('href');
             },
             error:(err)=>{
@@ -271,11 +295,12 @@ $(window).on('load', function () {
         $('.user_products').html(html_builder);
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
-        $('#account').show();
-        $('.logout').show();
+        $('#account').removeClass('is-hidden');
+        $('.logout').removeClass('is-hidden');
         $('.navbar-start a:nth-of-type(2)').off('click');
         $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
         $('.navbar-start a:nth-of-type(2)').attr('href', '#account');
-        $('.navbar-start a:nth-of-type(2)').html('Account');
+        // $('.navbar-start a:nth-of-type(2)').html('Account');
+        addUserProduct.resetForm();
     }
 });
