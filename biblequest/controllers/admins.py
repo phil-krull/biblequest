@@ -7,11 +7,11 @@ class Admins:
     def upload_file(self, form_data):
         result = admin.upload_file(form_data.files['file'])
         # will be returning message as json
-        flash(result[1])
+        # flash(result[1])
         return redirect('/admin')
 
     def email_admin(self, form_data):
-        flash('email sent')
+        # flash('email sent')
         admin.email_admin(form_data)
         return redirect('/')
 

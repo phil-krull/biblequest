@@ -30,8 +30,8 @@ class Customers():
         user_role = role.get_role()
         # 4. create and retrieve customer id(need role id, customer data)
         customer_id = customer.create_user(user_role, form_data)
-        print('-'*90)
-        print(customer_id)
+        # print('-'*90)
+        # print(customer_id)
         # 5. create customer address (need customer id, address data)
         address.set_customer_address(customer_id, form_data)
 
@@ -42,9 +42,9 @@ class Customers():
 
     def login_customer(self, form_data):
         user = customer.get_user_by_email(form_data['lemail'])
-        print(user)
+        # print(user)
         # print(form_data)
-        print('+'*90)
+        # print('+'*90)
         if len(user) < 1:
             return jsonify({'status': False, 'message': 'Invalid email'})
             # return redirect('/')

@@ -8,8 +8,8 @@ bcrypt = Bcrypt(app)
 
 class Customer:
     def validate_user(self, form_data):
-        print('%'*90)
-        print(form_data)
+        # print('%'*90)
+        # print(form_data)
         # 1. validate purpose
         return jsonify({'success': True})
 
@@ -40,16 +40,16 @@ class Customer:
         
     def get_user_by_email(self, user_email):
         mysql = connectToMySQL('bible_quest')
-        print('*'*100)
+        # print('*'*100)
         query = 'SELECT customer_id, roles_role_id, email, password FROM customers WHERE email = %(email)s;'
         data = {'email': user_email}
         return mysql.query_db(query, data)
 
     def verify_password(self, saved_password, form_password):
-        print('saved_password')
-        print(saved_password)
-        print('form_password')
-        print(form_password)
+        # print('saved_password')
+        # print(saved_password)
+        # print('form_password')
+        # print(form_password)
         if bcrypt.check_password_hash(saved_password, form_password):
             return True
         else:

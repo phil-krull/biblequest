@@ -27,20 +27,20 @@ class Admin:
         # **************** add file name to db ****************
         # check if the post request has the file part
         if 'file' not in file:
-            print('========================================= in file not in request =========================================')
+            # print('========================================= in file not in request =========================================')
             return False, 'No file part'
         # file = request.files['file']
-        print(file.filename)
-        print(file.filename.rsplit('.', 1)[1].lower())
-        print(self.file_is_valid(file.filename))
-        print('-'*90)
+        # print(file.filename)
+        # print(file.filename.rsplit('.', 1)[1].lower())
+        # print(self.file_is_valid(file.filename))
+        # print('-'*90)
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            print('========================================= in file name is empty =========================================')
+            # print('========================================= in file name is empty =========================================')
             return False, 'No select file'
         if file and self.file_is_valid(file.filename):
-            print('========================================= in file saving file =========================================')
+            # print('========================================= in file saving file =========================================')
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # file.save(os.path.join(app.config['UPLOAD_FOLDER']))

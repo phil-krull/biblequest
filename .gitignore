@@ -4,3 +4,4 @@ mysqlconnection.py
 uploaded_files/
 *.epgz
 *.mwb
+server.py

@@ -35,7 +35,7 @@ class Code():
                 result = mysql.query_db(query)[0]
                 range_start = result['end']
                 start = result['end'] + 1
-                print(range_start)
+                # print(range_start)
             except IndexError:
                 start = 1
                 mysql = connectToMySQL('bible_quest')
@@ -46,7 +46,7 @@ class Code():
             with open(LOCATION + self.files[idx], newline='') as csvfile:
                 # using range_start to only saved new codes generated on top of the existing codes
                 spamreader = islice(csv.reader(csvfile, delimiter=' ', quotechar='|'), range_start, None)
-                print('-'*20 + 'NEW FILE' + '-'*20)
+                # print('-'*20 + 'NEW FILE' + '-'*20)
                 for row in spamreader:
                     mysql = connectToMySQL('bible_quest')
                     query = 'INSERT INTO ' + self.files[idx][0:-4] + ' (number, created_at, updated_at) VALUES (%(code)s, NOW(), NOW());'
@@ -67,11 +67,11 @@ class Code():
         try:
             product_idx = product_idx_list[0]
         except ValueError:
-            print('invalid product substring')
+            # print('invalid product substring')
             return False
         else:
-            print(self.files[product_idx][0:-4])
-            print(product_code)
+            # print(self.files[product_idx][0:-4])
+            # print(product_code)
             product_sub_table = self.files[product_idx][0:-4]
             mysql = connectToMySQL('bible_quest')
             # get product id from * table
@@ -80,8 +80,8 @@ class Code():
                 'number': product_code
             }
             product_id = mysql.query_db(query, data)
-            print('^'*60)
-            print(product_id)
+            # print('^'*60)
+            # print(product_id)
             if len(product_id) > 0:
                 #product found
                 mysql = connectToMySQL('bible_quest')
