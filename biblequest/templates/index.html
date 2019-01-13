@@ -10,7 +10,8 @@
     <!-- Bulma Version 0.7.1-->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" /> -->
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style/css/mystyles.css') }}"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/css/mystyles.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style/css/bulma.min.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/css/index.css') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
     <!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
@@ -210,14 +211,14 @@
     </nav>
 <!-- ---------------------------------------------- end of nav bar ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of hero section ---------------------------------------------- -->
-    <section class="hero">
-        <figure class="image">
+    <!-- <section class="hero">
+        <figure class="image"> -->
             <!-- <img src="https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
-        </figure>
-    </section>
+        <!-- </figure>
+    </section> -->
 <!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of home section ---------------------------------------------- -->
-    <section id="home" class="section">
+    <!-- <section id="home" class="section">
         <div class="container has-text-centered">
             <h2 class="title is-size-1 has-text-weight-semibold has-text-white">Bible Quest</h2>
             <h3 class="subtitle has-text-white has-text-weight-semibold is-size-4">Bible Quest empowers parents to teach their children to use God's Word as the FOUNDATION for their thought process!</h3>
@@ -244,7 +245,7 @@
                                     <img src="{{ url_for('static', filename='images/new_images/EquipWebsite2018.png')}}" alt="Placeholder image">
                                 </figure>
                             </div>
-                            <div class="card-content border-dark">
+                            <div class="card-content border-dark"> -->
                                 <!-- <div class="media">
                                     <div class="media-content">
                                         <p class="title is-4">John Smith</p>
@@ -252,7 +253,7 @@
                                     </div>
                                 </div> -->
                                 
-                                <div class="content">
+                                <!-- <div class="content">
                                     The Equip Phase builds biblical knowledge through memorization. Maximize and master memorized content with active, visual, and audio elements!
                                 </div>
                             </div>
@@ -265,7 +266,7 @@
                                     <img src="{{ url_for('static', filename='images/new_images/EmpowerWebsite2018.png')}}" alt="Placeholder image">
                                 </figure>
                             </div>
-                            <div class="card-content">
+                            <div class="card-content"> -->
                                 <!-- <div class="media">
                                     <div class="media-content">
                                         <p class="title is-4">John Smith</p>
@@ -273,7 +274,7 @@
                                     </div>
                                 </div> -->
                                 
-                                <div class="content">
+                                <!-- <div class="content">
                                     The Empower Phase aims to develop student understanding through Explorations and Exercises. Explorations involve questions and activities that help students think Biblically. Exercises provide practice using Biblical information with speed and accuracy.
                                 </div>
                             </div>
@@ -286,12 +287,12 @@
                                     <img src="{{ url_for('static', filename='images/new_images/ExpeditionWebsite2018.png')}}" alt="Placeholder image">
                                 </figure>
                             </div>
-                            <div class="card-content">
+                            <div class="card-content"> -->
                                 <!-- <div class="media-content">
                                     <p class="title is-4">John Smith</p>
                                     <p class="subtitle is-6">@johnsmith</p>
                                 </div> -->
-                                <div class="content">
+                                <!-- <div class="content">
                                     Expeditions help students of the Bible to use what they know and understand to communicate biblical truth to others. By engaging with Biblical truth under the guidance of a mentor, students develop biblical wisdom.
                                 </div>
                             </div>
@@ -299,16 +300,28 @@
                     </div>
                 </div>
             </div>
-    </section>
+    </section> -->
+    <figure class="image">
+        <img src="{{ url_for('static', filename='images/01_12/Header.png')}}" alt="Placeholder image"" alt="">
+    </figure>
+    <figure class="image">
+        <img src="{{ url_for('static', filename='images/01_12/Section 2 with text.png')}}" alt="Placeholder image"" alt="">
+    </figure>
+    <figure class="image">
+        <img src="{{ url_for('static', filename='images/01_12/Section 3.png')}}" alt="Placeholder image"" alt="">
+    </figure>
+    <figure class="image">
+        <img src="{{ url_for('static', filename='images/01_12/Section 4.png')}}" alt="Placeholder image"" alt="">
+    </figure>
 <!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
     <section id="account" class="section is-hidden">
         <div class="container has-text-centered">
-            <h2 class="title has-text-white">Account</h2>
+            <h2 class="title">Account</h2>
             <!-- <h4 class='subtitle has-text-white'>Enter a code</h4> -->
             <form class="addUserProduct" action="/enterCode">
                 <div class="field">
-                    <label for="productCode" class="label has-text-white">Enter Product Code</label>
+                    <label for="productCode" class="label">Enter Product Code</label>
                     <div class="control">
                         <input id="productCode" class="input" name='acode' type="text" placeholder="code">
                     </div>
@@ -317,76 +330,76 @@
                     <button class="button is-primary">Submit</button>
                 </div>
             </form>
-            <h4 class='subtitle has-text-white'>Your products</h4>
+            <h4 class='subtitle'>Your products</h4>
             <div class="tile is-ancestor user_products">
             </div>
         </div>
     </section>
 <!-- ---------------------------------------------- end of home ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of products section ---------------------------------------------- -->
-    <section id="products" class="section">
+    <section id="products" class="section tile-background-color">
         <div class="container has-text-centered">
-            <h2 class="title has-text-white">Products</h2>
+            <h2 class="title">Products</h2>
             
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="church edition">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 Church Kit.png')}}" alt="church edition">
                             </figure>
-                            <p class="title">Church Edition</p>
-                            <p class="subtitle">Bible Quest 2-Year Curriculum</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/7716297" target="_blank">Purchase</a>
+                            <!-- <p class="title">Church Edition</p>
+                            <p class="subtitle">Bible Quest 2-Year Curriculum</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/7716297" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png')}}" alt="deluxe kit">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT-NT Kit.png')}}" alt="deluxe kit">
                             </figure>
-                            <p class="title">Deluxe Edition</p>
-                            <p class="subtitle">Bible Quest Curriculum Deluxe Old Testament & New Testament Set</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6818889" target="_blank">Purchase</a>
+                            <!-- <p class="title">Deluxe Edition</p>
+                            <p class="subtitle">Bible Quest Curriculum Deluxe Old Testament & New Testament Set</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6818889" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/WebProductNT2018Thumb.png')}}" alt="new testament kit">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT Kit.png')}}" alt="new testament kit">
                             </figure>
-                            <p class="title">New Testament Kit</p>
-                            <p class="subtitle">Bible Quest Curriculum NT Set</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/5956859" target="_blank">Purchase</a>
+                            <!-- <p class="title">New Testament Kit</p>
+                            <p class="subtitle">Bible Quest Curriculum NT Set</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/5956859" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/WebProductOT2018Thumb.png')}}" alt="old testament kit">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT Kit.png')}}" alt="old testament kit">
                             </figure>
-                            <p class="title">Old Testament Kit</p>
-                            <p class="subtitle">Bible Quest Curriculum OT Set</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/5956856" target="_blank">Purchase</a>
+                            <!-- <p class="title">Old Testament Kit</p>
+                            <p class="subtitle">Bible Quest Curriculum OT Set</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/5956856" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/FrontCoverDraft.jpg')}}" alt="david's mighty men">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 DMM.png')}}" alt="david's mighty men">
                             </figure>
-                            <p class="title">David's Mighty Men</p>
-                            <p class="subtitle">Pick Your Path Adventure! David's Mighty Men: Danger in Hebron</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6794399" target="_blank">Purchase</a>
+                            <!-- <p class="title">David's Mighty Men</p>
+                            <p class="subtitle">Pick Your Path Adventure! David's Mighty Men: Danger in Hebron</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6794399" target="_blank">Purchase</a>
                     </article>
                 </div>
             </div>
@@ -394,62 +407,62 @@
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/BibleGirlsParty.jpg')}}" alt="bible girls party">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 BGP.png')}}" alt="bible girls party">
                             </figure>
-                            <p class="title">Bible Girls Party</p>
-                            <p class="subtitle">Pick Your Path Adventure! Bible Girls Party: Esther's Maidens</p>
-                        </div>
-                        <a class="button button_color" href="https://biblequest.webs.com/apps/webstore/products/show/6794404" target="_blank">Purchase</a>
+                            <!-- <p class="title">Bible Girls Party</p>
+                            <p class="subtitle">Pick Your Path Adventure! Bible Girls Party: Esther's Maidens</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6794404" target="_blank">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/NTCD.png')}}" alt="new testament cd">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT CD.png')}}" alt="new testament cd">
                             </figure>
-                            <p class="title">New Testament CD</p>
-                            <p class="subtitle">Coming soon</p>
-                        </div>
-                        <a class="button button_color">Purchase</a>
+                            <!-- <p class="title">Old Testament CD</p>
+                            <p class="subtitle">Coming soon</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/OTCD.png')}}" alt="old testament cd">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT CD.png')}}" alt="old testament cd">
                             </figure>
-                            <p class="title">New Testament CD</p>
-                            <p class="subtitle">Coming soon</p>
-                        </div>
-                        <a class="button button_color">Purchase</a>
+                            <!-- <p class="title">New Testament CD</p>
+                            <p class="subtitle">Coming soon</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/NewTestamentcarddeck2018.png')}}" alt="new testemant card deck">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT Cards.png')}}" alt="new testemant card deck">
                             </figure>
-                            <p class="title">New Testament Card Deck</p>
-                            <p class="subtitle">Coming soon</p>
-                        </div>
-                        <a class="button button_color">Purchase</a>
+                            <!-- <p class="title">New Testament Card Deck</p>
+                            <p class="subtitle">Coming soon</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color">Purchase</a>
                     </article>
                 </div>
                 <div class="tile is-parent">
                     <article class="tile is-child box">
-                        <div class="button_center">
+                        <!-- <div class="button_center"> -->
                             <figure class="image">
-                                <img src="{{ url_for('static', filename='images/new_new_images/OldTestamentcarddeck2018.png')}}" alt="old testemant card deck">
+                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT Cards.png')}}" alt="old testemant card deck">
                             </figure>
-                            <p class="title">Old Testament Card Deck</p>
-                            <p class="subtitle">Coming soon</p>
-                        </div>
-                        <a class="button button_color">Purchase</a>
+                            <!-- <p class="title">Old Testament Card Deck</p>
+                            <p class="subtitle">Coming soon</p> -->
+                        <!-- </div> -->
+                        <a class="button tile-background-color">Purchase</a>
                     </article>
                 </div>
             </div>
@@ -459,12 +472,12 @@
 <!-- ---------------------------------------------- start of resources section ---------------------------------------------- -->
     <section id="resources" class="section">
         <div class="container has-text-centered">
-            <h2 class="title has-text-white">Resources/Community</h2>
+            <h2 class="title">Resources/Community</h2>
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
+                    <article class="tile is-child box tile-background-color">
                         <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/new_images/BlogIcon2.png')}}" alt="">
+                            <img src="{{ url_for('static', filename='images/01_12/BlogIcon2018.jpg')}}" alt="">
                         </figure>
                         <p class="title">Blog</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
@@ -472,9 +485,9 @@
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
+                    <article class="tile is-child box tile-background-color">
                         <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/new_images/ForumIcon.png')}}" alt="">
+                            <img src="{{ url_for('static', filename='images/01_12/ForumIcon2018.jpg')}}" alt="">
                         </figure>
                         <p class="title">Forums</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
@@ -482,9 +495,9 @@
                     </article>
                 </div>
                 <div class="tile is-parent">
-                    <article class="tile is-child box">
+                    <article class="tile is-child box tile-background-color">
                         <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/VideoIcon.png')}}" alt="">
+                            <img src="{{ url_for('static', filename='images/01_12/VideosIcon2018.jpg')}}" alt="">
                         </figure>
                         <p class="title">Videos</p>
                         <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
@@ -496,9 +509,9 @@
     </section>
 <!-- ---------------------------------------------- end of products ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of contact section ---------------------------------------------- -->
-    <section id="contact" class="section columns">
+    <section id="contact" class="section columns tile-background-color is-marginless">
         <div class="container has-text-centered column is-10 is-offset-1">
-            <h2 class="title has-text-white">Contact</h2>
+            <h2 class="title">Contact</h2>
             
             <form action="email" method="post">
                 <div class="field is-horizontal">
@@ -548,7 +561,7 @@
     </section>
 <!-- ---------------------------------------------- end of contact ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of footer ---------------------------------------------- -->
-    <footer class="footer">
+    <footer class="footer is-white">
         <div class="container">
             <div class="content has-text-centered">
                 <p>

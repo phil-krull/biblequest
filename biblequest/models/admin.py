@@ -24,12 +24,13 @@ mail = Mail(app)
 
 class Admin:
     def upload_file(self, file):
+        print(file);
         # **************** add file name to db ****************
         # check if the post request has the file part
         if 'file' not in file:
             # print('========================================= in file not in request =========================================')
             return False, 'No file part'
-        # file = request.files['file']
+        file = file['file']
         # print(file.filename)
         # print(file.filename.rsplit('.', 1)[1].lower())
         # print(self.file_is_valid(file.filename))

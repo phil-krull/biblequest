@@ -4,21 +4,21 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 2600px; */
-    background: rgba(73,155,234,1);
+    /* background: rgba(73,155,234,1);
     background: -moz-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(73,155,234,1)), color-stop(100%, rgba(34,23,92,1)));
     background: -webkit-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
     background: -o-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
     background: -ms-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
     background: radial-gradient(ellipse at center, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#22175c', GradientType=1 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#22175c', GradientType=1 ); */
 }
 .navbar {
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     /* background-color: #22175C; */
-    border-bottom: 2px solid #22175C;
-    margin-bottom: 5px;
+    /* border-bottom: 2px solid #22175C;
+    margin-bottom: 5px; */
 
 }
 .navbar-brand {
@@ -46,9 +46,9 @@ body {
     /* top: -12px;
     left: 0px; */
 }
-#products .button_center {
+/* #products .button_center {
     min-height: 500px;
-}
+} */
 #products image {
     margin-top: 1.5rem;
 }
@@ -109,3 +109,8 @@ body {
     background-color: #ccc;
 } */
 /* Popup box END */
+
+
+.tile-background-color {
+    background-color: rgb(235,242,252);
+}

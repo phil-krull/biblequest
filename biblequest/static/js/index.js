@@ -274,7 +274,7 @@ $(window).on('load', function () {
         if(products) {
             for(let i = 0; i < products.length; i++) {
                 html_builder += `<div class="tile is-parent is-3">
-                                    <article class="tile is-child box">
+                                    <article class="tile is-child box tile-background-color">
                                         <figure class="image">
                                             <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
                                         </figure>

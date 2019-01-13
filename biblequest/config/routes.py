@@ -110,7 +110,7 @@ def email():
 # will need to change the return statements
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
-    # print(request.files)
+    print(request)
     # if request.method == 'POST':
     #     # check if the post request has the file part
     #     if 'file' not in request.files:
@@ -136,7 +136,7 @@ def upload_file():
     #         # file.save(os.path.join(app.config['UPLOAD_FOLDER']))
     #         # return redirect('/admin')
     # return redirect('/admin')
-    return admins.upload_file(request.form)
+    return admins.upload_file(request.files)
 
 # -------------------------------------------------------- customer with code routes --------------------------------------------------------
 @app.route('/enterCode', methods=['POST'])
