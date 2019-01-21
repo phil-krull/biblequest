@@ -24,7 +24,7 @@ mail = Mail(app)
 
 class Admin:
     def upload_file(self, file):
-        print(file);
+        # print(file)
         # **************** add file name to db ****************
         # check if the post request has the file part
         if 'file' not in file:

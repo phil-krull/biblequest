@@ -13,19 +13,23 @@ class Codes():
         code.code_saver()
         return redirect('/')
 
-    def get_product(self, product_code):
+    def get_product(self, product_code, product_name):
         # print('in code get product')
         # print('*'*100)
         # set product to user
-        result = code.set_user_product(session['user_id'], product_code)
-        if result:
+        # result = code.set_user_product(session['user_id'], product_code)
+        check_product = code.get_user_product(session['user_id'], product_code)
+        # print('^'*90)
+        # print(check_product)
+        if len(check_product) > 0:
+            # print('yoyoyoyo')
             # product found
             # print(app.config['UPLOAD_FOLDER'])
-            return send_from_directory(app.config['UPLOAD_FOLDER'], 'testfile.txt.zip', as_attachment=True)
+            return send_from_directory(app.config['UPLOAD_FOLDER'], product_name+'.zip', as_attachment=True)
         else:
             # invalid code
             # print('in get_product invalid code condition')
-            resp = jsonify({'message': 'Please enter a valid product code'})
+            resp = jsonify({'message': 'You have no product with that code'})
             resp.status_code = 300
             # print(resp)
             return resp
@@ -34,4 +38,19 @@ class Codes():
         pass
 
     def set_user_products(self, user_id, product_code):
-        pass
+        check_product = code.get_user_product(user_id, product_code)
+        # print('+'*90)
+        # print(len(check_product))
+        if len(check_product) < 1:
+            result = code.set_user_product(user_id, product_code)
+            if result:
+                return jsonify({'status': True, 'product': result})
+            else:
+                # invalid code
+                resp = jsonify({'message': 'Please enter a valid product code'})
+                resp.status_code = 300
+                return resp
+        else:
+            resp = jsonify({'message': 'You are already associated with the product code'})
+            resp.status_code = 300
+            return resp

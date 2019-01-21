@@ -61,6 +61,7 @@ class Code():
                     pass
 
     def set_user_product(self, user_id, product_code):
+        # print('product_code: ' + product_code)
         product_sub_str = product_code[:3]
         # indices = [i for i, elem in enumerate(mylist) if 'aa' in elem]
         product_idx_list = [idx for idx, elem in enumerate(self.base_strings) if product_sub_str in elem]
@@ -91,9 +92,9 @@ class Code():
                     'customer': user_id
                 }
                 mysql.query_db(query, data)
-                return True
+                return {'name': product_sub_table, 'number': product_code}
             else:
-                print('product not found')
+                # print('product not found')
                 return False
 
     def get_user_products(self, user_id):
@@ -108,7 +109,11 @@ class Code():
         product = mysql.query_db(query, data)
         try:
             product[0]['name'] = 'bible_girls_party'
-            products.append(product[0])
+            # print('-'*30, 'bible girls party', '-'*30)
+            for p in product:
+                # print(p)
+                p['name'] = 'bible_girls_party'
+                products.append(p)
         except:
             pass
         mysql = connectToMySQL('bible_quest')
@@ -118,7 +123,11 @@ class Code():
         product = mysql.query_db(query, data)
         try:
             product[0]['name'] = 'davids_mighty_men'
-            products.append(product[0])
+            # print('-'*30, 'davids mighty men', '-'*30)
+            for p in product:
+                # print(p)
+                p['name'] = 'davids_mighty_men'
+                products.append(p)
         except:
             pass
         mysql = connectToMySQL('bible_quest')
@@ -128,7 +137,11 @@ class Code():
         product = mysql.query_db(query, data)
         try:
             product[0]['name'] = 'new_testament'
-            products.append(product[0])
+            # print('-'*30, 'new testament', '-'*30)
+            for p in product:
+                # print(p)
+                p['name'] = 'new_testament'
+                products.append(p)
         except:
             pass
         mysql = connectToMySQL('bible_quest')
@@ -138,9 +151,31 @@ class Code():
         product = mysql.query_db(query, data)
         try:
             product[0]['name'] = 'old_testament'
-            products.append(product[0])
+            # print('-'*30, 'old testament', '-'*30)
+            for p in product:
+                # print(p)
+                p['name'] = 'old_testament'
+                products.append(p)
         except:
             pass
         return products
 
     # get single product name and number, use for above method 
+    def get_user_product(self, user_id, product_code):
+        product_sub_str = product_code[:3]
+        product_idx_list = [idx for idx, elem in enumerate(self.base_strings) if product_sub_str in elem]
+        # print(product_idx_list)
+        try:
+            product_idx = product_idx_list[0]
+        except ValueError:
+            # print('invalid product substring')
+            return False
+        else:
+            mysql = connectToMySQL('bible_quest')
+            product_table = self.files[product_idx][0:-4]
+            query = 'SELECT * FROM ' + product_table + '_has_customers JOIN ' + product_table + ' ON ' + product_table + '_has_customers.' + product_table + '_' + product_table + '_id = ' + product_table + '.' + product_table + '_id WHERE ' + product_table + '_has_customers.customers_customer_id = %(user)s AND ' +  product_table + '.number = %(product)s'
+            data = {
+                'user': user_id,
+                'product': product_code
+            }
+            return mysql.query_db(query, data)

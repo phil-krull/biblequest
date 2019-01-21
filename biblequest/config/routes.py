@@ -42,10 +42,6 @@ from flask import Flask, render_template, request, redirect, flash, session
 
 # bcrypt = Bcrypt(app)
 
-# -------------------------------------------------------- root routes --------------------------------------------------------
-@app.route('/')
-def index():
-    return customers.index()
 
 
 # -------------------------------------------------------- customer routes --------------------------------------------------------
@@ -110,7 +106,7 @@ def email():
 # will need to change the return statements
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
-    print(request)
+    # print(request)
     # if request.method == 'POST':
     #     # check if the post request has the file part
     #     if 'file' not in request.files:
@@ -139,6 +135,27 @@ def upload_file():
     return admins.upload_file(request.files)
 
 # -------------------------------------------------------- customer with code routes --------------------------------------------------------
-@app.route('/enterCode', methods=['POST'])
-def product_code():
-    return codes.get_product(request.form['acode'])
+@app.route('/enterCode/<code>', methods=['POST'])
+def product_code(code):
+    return codes.get_product(code, request.form['name'])
+
+# need to authenticate this route
+@app.route('/addProductToUser', methods=['POST'])
+def addProductToUser():
+    return codes.set_user_products(session['user_id'], request.form['acode'])
+
+# -------------------------------------------------------- root routes --------------------------------------------------------
+# @app.route('/')
+# def catch_all(path):
+#     return render_template('index.html')
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return customers.index()
+
+def admin_checker():
+    if session['is_admin']:
+        return True
+    else:
+        return False

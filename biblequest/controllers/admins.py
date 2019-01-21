@@ -5,7 +5,7 @@ admin = Admin()
 
 class Admins:
     def upload_file(self, form_data):
-        print(form_data)
+        # print(form_data)
         result = admin.upload_file(form_data)
         # will be returning message as json
         # flash(result[1])

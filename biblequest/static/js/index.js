@@ -212,8 +212,48 @@ $(window).on('load', function () {
         })
     })
 
+    // add user product and display newly added product
     $(document).on('submit', '.addUserProduct', function(e){
         console.log(this);
+        let tile_ancestor = $('.user_products .tile ancestor:last').length
+        console.log(tile_ancestor);
+        console.log('*'.repeat(90));
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action'),
+            method: 'POST',
+            data: $(this).serialize(),
+            success: (data)=>{
+                console.log('success data: ', data);
+                $(this).closest('form')[0].reset();
+                let html_string = buildUserProduct(data['product']);
+                let tile_ancestor_length = $('.user_products .is-ancestor:last').children().length
+                if(tile_ancestor_length > 3) {
+                    html_string = '<div class="tile is-ancestor">' + html_string + '</div>';
+                    // $('.user_products').append('<div class="tile is-ancestor">');
+                    $('.user_products').append(html_string);
+                    // $('.user_products').append('</div>');
+                } else {
+                    $('.user_products .is-ancestor:last').append(html_string);
+                }
+                // $('.user_products').append(html_string);
+                $('.product_error').remove();
+                addUserProduct.resetForm();
+            },
+            error: (data)=>{
+                console.log('error response: ', data);
+                // add error message to form
+                if($('.product_error').length < 1) {
+                    $('#productCode').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
+                }
+            }
+        });
+    })
+
+    // download user product
+    $(document).on('submit', '.downloadUserProduct', function(e){
+        console.log(this);
+        let product_name = $(this).find('input[name="name"]').val();
         e.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
@@ -229,11 +269,11 @@ $(window).on('load', function () {
                 a.href = url;
                 // need to make the download field dynamic
                 // need update the userView with the just added product
-                a.download = 'myfile.zip';
+                a.download = `${product_name}.zip`;
                 a.click();
                 window.URL.revokeObjectURL(url);
                 $(this).closest('form')[0].reset();
-                $('.product_error').hide();
+                $('.product_error').remove();
                 addUserProduct.resetForm();
             },
             error: (data)=>{
@@ -269,29 +309,39 @@ $(window).on('load', function () {
         })
     })
 
+    function buildUserProduct(product) {
+        return `<div class="tile is-parent is-3">
+            <article class="tile is-child box tile-background-color">
+                <figure class="image box is-paddingless">
+                    <img src="/static/images/01_12/${product.name}.png">
+                </figure>
+                <form class="downloadUserProduct" action="/enterCode/${product.number}">
+                <div class="field">
+                    <input type="hidden" name="name" value=${product.name}>
+                </div>
+                <div class="control has-text-centered">
+                    <button class="button is-primary">Download</button>
+                </div>
+                </form>
+            </article>
+        </div>`
+    }
+
     function userView(products = null) {
-        let html_builder = '';
+        let html_builder = '<div class="tile is-ancestor">';
         if(products) {
+            let j = 0;
             for(let i = 0; i < products.length; i++) {
-                html_builder += `<div class="tile is-parent is-3">
-                                    <article class="tile is-child box tile-background-color">
-                                        <figure class="image">
-                                            <img src="https://images.pexels.com/photos/374710/pexels-photo-374710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-                                        </figure>
-                                        <p class="title">${products[i].name}</p>
-                                        <p class="subtitle">Fri 27 Nov 2016</p>
-                                        <form class="addUserProduct" action="/enterCode">
-                                            <div class="field">
-                                                <input name='acode' type="hidden" value=${products[i].number}>
-                                                <div class="control has-text-centered">
-                                                    <button class="button is-primary">Download</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </article>
-                                </div>`
+                html_builder += buildUserProduct(products[i]);
+                j++;
+                if(j%4 == 0 && i + 1 != products.length) {
+                    html_builder += '</div><div class="tile is-ancestor">';
+                }
             }
+            html_builder += '</div>';
         }
+                                    // <p class="title">${products[i].name}</p>
+                                    // <p class="subtitle">Fri 27 Nov 2016</p>
         $('.user_products').html(html_builder);
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();

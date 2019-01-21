@@ -319,7 +319,7 @@
         <div class="container has-text-centered">
             <h2 class="title">Account</h2>
             <!-- <h4 class='subtitle has-text-white'>Enter a code</h4> -->
-            <form class="addUserProduct" action="/enterCode">
+            <form class="addUserProduct" action="/addProductToUser">
                 <div class="field">
                     <label for="productCode" class="label">Enter Product Code</label>
                     <div class="control">
@@ -331,8 +331,8 @@
                 </div>
             </form>
             <h4 class='subtitle'>Your products</h4>
-            <div class="tile is-ancestor user_products">
-            </div>
+            <article class="user_products">
+            </article>
         </div>
     </section>
 <!-- ---------------------------------------------- end of home ---------------------------------------------- -->
@@ -345,7 +345,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 Church Kit.png')}}" alt="church edition">
                             </figure>
                             <!-- <p class="title">Church Edition</p>
@@ -357,7 +357,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT-NT Kit.png')}}" alt="deluxe kit">
                             </figure>
                             <!-- <p class="title">Deluxe Edition</p>
@@ -369,8 +369,8 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT Kit.png')}}" alt="new testament kit">
+                            <figure class="image box is-paddingless">
+                                <img src="{{ url_for('static', filename='images/01_12/new_testament.png')}}" alt="new testament kit">
                             </figure>
                             <!-- <p class="title">New Testament Kit</p>
                             <p class="subtitle">Bible Quest Curriculum NT Set</p> -->
@@ -381,8 +381,8 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT Kit.png')}}" alt="old testament kit">
+                            <figure class="image box is-paddingless">
+                                <img src="{{ url_for('static', filename='images/01_12/old_testament.png')}}" alt="old testament kit">
                             </figure>
                             <!-- <p class="title">Old Testament Kit</p>
                             <p class="subtitle">Bible Quest Curriculum OT Set</p> -->
@@ -393,8 +393,8 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 DMM.png')}}" alt="david's mighty men">
+                            <figure class="image box is-paddingless">
+                                <img src="{{ url_for('static', filename='images/01_12/davids_mighty_men.png')}}" alt="david's mighty men">
                             </figure>
                             <!-- <p class="title">David's Mighty Men</p>
                             <p class="subtitle">Pick Your Path Adventure! David's Mighty Men: Danger in Hebron</p> -->
@@ -408,8 +408,8 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 BGP.png')}}" alt="bible girls party">
+                            <figure class="image box is-paddingless">
+                                <img src="{{ url_for('static', filename='images/01_12/bible_girls_party.png')}}" alt="bible girls party">
                             </figure>
                             <!-- <p class="title">Bible Girls Party</p>
                             <p class="subtitle">Pick Your Path Adventure! Bible Girls Party: Esther's Maidens</p> -->
@@ -420,7 +420,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT CD.png')}}" alt="new testament cd">
                             </figure>
                             <!-- <p class="title">Old Testament CD</p>
@@ -432,7 +432,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT CD.png')}}" alt="old testament cd">
                             </figure>
                             <!-- <p class="title">New Testament CD</p>
@@ -444,7 +444,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT Cards.png')}}" alt="new testemant card deck">
                             </figure>
                             <!-- <p class="title">New Testament Card Deck</p>
@@ -456,7 +456,7 @@
                 <div class="tile is-parent">
                     <article class="tile is-child box">
                         <!-- <div class="button_center"> -->
-                            <figure class="image">
+                            <figure class="image box is-paddingless">
                                 <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT Cards.png')}}" alt="old testemant card deck">
                             </figure>
                             <!-- <p class="title">Old Testament Card Deck</p>
