@@ -46,7 +46,9 @@ class Customers():
         # print(form_data)
         # print('+'*90)
         if len(user) < 1:
-            return jsonify({'status': False, 'message': 'Invalid email'})
+            resp = jsonify({'status': False, 'message': 'Invalid email'})
+            resp.status_code = 300
+            return resp
             # return redirect('/')
         else:
             valid_login = customer.verify_password(user[0]['password'], form_data['lpassword'])

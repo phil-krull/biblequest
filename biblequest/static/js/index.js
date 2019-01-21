@@ -38,6 +38,7 @@ $(window).on('load', function () {
     $('.popupCancel').click(function(){
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
+        toggleBurger();
     });
     $('.popupRegister').click(function(){
         $('.hover_bkgr_register').show();
@@ -183,10 +184,11 @@ $(window).on('load', function () {
                 registerValidation.resetForm();
                 $(this).closest('form')[0].reset();
                 userView();
+                toggleBurger();
             },
             error: (data)=>{
                 console.log('error response', data);
-                $('#registerEmail').after(`<p class='help is-danger product_error'>${res.responseJSON.message}</p>`);
+                $('#registerEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
             }
         })
     })
@@ -201,12 +203,14 @@ $(window).on('load', function () {
             dataType: 'json',
             url: '/loginCustomer',
             success: (data)=>{
+                console.log(data);
                 loginValidation.resetForm();
                 $(this).closest('form')[0].reset();
                 userView(data.products);
                 toggleBurger();
             },
             error: (data)=>{
+                $('#loginEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
                 console.log('error response', data);
             }
         })
