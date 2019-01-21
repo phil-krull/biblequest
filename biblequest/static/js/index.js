@@ -13,11 +13,18 @@ $(window).on('load', function () {
 
     $(".navbar-burger").click(function() {
         toggleBurger();
+        resetAllForms();
     });
-    
-    $('.navbar-item:not(.trigger_popup_fricc)').click(function(){
+    $(document).on('click', '.navbar-item:not(.trigger_popup_fricc)', function() {
         toggleBurger();
+        resetAllForms();
     })
+    
+    // $('.navbar-item:not(.trigger_popup_fricc)').click(function(){
+    //     console.log('burger item clicked');
+    //     toggleBurger();
+    //     resetAllForms();
+    // })
     
     function toggleBurger() {
         // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
@@ -36,6 +43,7 @@ $(window).on('load', function () {
     //     $('.hover_bkgr_register').hide();
     // });
     $('.popupCancel').click(function(){
+        resetAllForms();
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
         toggleBurger();
@@ -170,6 +178,12 @@ $(window).on('load', function () {
         //adding bulma error message class
         errorClass: 'help is-danger'
     })
+
+    let resetAllForms = function () {
+        registerValidation.resetForm();
+        loginValidation.resetForm();
+        addUserProduct.resetForm();
+    }
     
     $(document).on('submit', '#register', function(e){
         console.log(this);
@@ -183,8 +197,8 @@ $(window).on('load', function () {
                 console.log('success response', data);
                 registerValidation.resetForm();
                 $(this).closest('form')[0].reset();
-                userView();
                 toggleBurger();
+                userView();
             },
             error: (data)=>{
                 console.log('error response', data);
@@ -206,8 +220,8 @@ $(window).on('load', function () {
                 console.log(data);
                 loginValidation.resetForm();
                 $(this).closest('form')[0].reset();
-                userView(data.products);
                 toggleBurger();
+                userView(data.products);
             },
             error: (data)=>{
                 $('#loginEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
@@ -353,6 +367,7 @@ $(window).on('load', function () {
         $('.logout').removeClass('is-hidden');
         $('.navbar-start a:nth-of-type(2)').off('click');
         $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
+        $('.navbar-start a:nth-of-type(2)').addClass('navbar-item');
         $('.navbar-start a:nth-of-type(2)').attr('href', '#account');
         // $('.navbar-start a:nth-of-type(2)').html('Account');
         addUserProduct.resetForm();
