@@ -53,7 +53,7 @@ class Admin:
         email = form_data['email']
         message = form_data['message']
 
-        msg = Message(subject=f'{ name } has sent you a new message', sender='biblequestcbc@gmail.com', body = message, reply_to=email, recipients=['philip.krull@hotmail.com'])
+        msg = Message(subject='{ name } has sent you a new message'.format(name=name), sender='biblequestcbc@gmail.com', body = message, reply_to=email, recipients=['philip.krull@hotmail.com'])
         # recipients=['biblequestcbc@gmail.com']
         mail.send(msg)
 
