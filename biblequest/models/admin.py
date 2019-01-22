@@ -56,7 +56,7 @@ class Admin:
         message = form_data['message']
         print("*"*90)
         print(name)
-        subject = '%s has sent you a new message'%name
+        subject = '{} has sent you a new message'.format(name)
 
         msg = Message(subject=subject, sender='pkrull@codingdojo.com', body = message, reply_to=email, recipients=['biblequestcbc@gmail.com'])
         # recipients=['biblequestcbc@gmail.com']
