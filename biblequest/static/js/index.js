@@ -328,6 +328,10 @@ $(window).on('load', function () {
     })
 
     function buildUserProduct(product) {
+        let davidMMChecker = '';
+        if(product.name == 'davids_mighty_men'){
+            davidMMChecker = 'disabled';
+        }
         return `<div class="tile is-parent is-3">
             <article class="tile is-child box tile-background-color">
                 <figure class="image box is-paddingless">
@@ -338,7 +342,7 @@ $(window).on('load', function () {
                     <input type="hidden" name="name" value=${product.name}>
                 </div>
                 <div class="control has-text-centered">
-                    <button class="button is-primary">Download</button>
+                    <button class="button is-primary" ${davidMMChecker}>Download</button>
                 </div>
                 </form>
             </article>
