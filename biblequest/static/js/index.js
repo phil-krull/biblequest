@@ -270,7 +270,7 @@ $(window).on('load', function () {
 
     // download user product
     $(document).on('submit', '.downloadUserProduct', function(e){
-        console.log(this);
+        $(this).closest('form').find(':submit').addClass('is-loading');
         let product_name = $(this).find('input[name="name"]').val();
         e.preventDefault();
         $.ajax({
@@ -293,6 +293,7 @@ $(window).on('load', function () {
                 $(this).closest('form')[0].reset();
                 $('.product_error').remove();
                 addUserProduct.resetForm();
+                $(this).closest('form').find(':submit').removeClass('is-loading');
             },
             error: (data)=>{
                 console.log('error response: ', data);
@@ -342,7 +343,7 @@ $(window).on('load', function () {
                     <input type="hidden" name="name" value=${product.name}>
                 </div>
                 <div class="control has-text-centered">
-                    <button class="button is-primary" ${davidMMChecker}>Download</button>
+                    <button type="submit" class="button is-primary" ${davidMMChecker}>Download</button>
                 </div>
                 </form>
             </article>
