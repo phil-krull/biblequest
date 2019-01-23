@@ -49,12 +49,12 @@ class Admin:
             return True, 'File uploaded'
 
     def email_admin(self, form_data):
-        mess = form_data['message']
-        name = form_data['emailer']
-        email = form_data['email']
-        subject = '{} has sent you a new message'.format(name)
+        e_mess = form_data['email_message']
+        e_name = form_data['email_name']
+        e_email = form_data['email_email']
+        subject = '{} has sent you a new message'.format(e_name)
 
-        msg = Message(subject=subject, sender='pkrull@codingdojo.com', body = mess, reply_to=email, recipients=['biblequestcbc@gmail.com'])
+        msg = Message(subject=subject, sender='pkrull@codingdojo.com', body = e_mess, reply_to=e_email, recipients=['biblequestcbc@gmail.com'])
         # recipients=['biblequestcbc@gmail.com']
         mail.send(msg)
 
