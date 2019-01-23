@@ -50,7 +50,7 @@ class Admin:
 
     def email_admin(self, form_data):
         mess = form_data['message']
-        name = form_data['name']
+        name = form_data['emailer']
         email = form_data['email']
         subject = '{} has sent you a new message'.format(name)
 
