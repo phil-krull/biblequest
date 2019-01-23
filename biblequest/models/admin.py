@@ -51,14 +51,14 @@ class Admin:
     def email_admin(self, form_data):
         print("*"*90)
         print(form_data)
+        mess = form_data['message']
         name = form_data['name']
         email = form_data['email']
-        message = form_data['message']
         print("*"*90)
         print(name)
         subject = '{} has sent you a new message'.format(name)
 
-        msg = Message(subject=subject, sender='pkrull@codingdojo.com', body = message, reply_to=email, recipients=['biblequestcbc@gmail.com'])
+        msg = Message(subject=subject, sender='pkrull@codingdojo.com', body = mess, reply_to=email, recipients=['biblequestcbc@gmail.com'])
         # recipients=['biblequestcbc@gmail.com']
         mail.send(msg)
 
