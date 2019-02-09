@@ -76,18 +76,22 @@ def customer_checker():
 
 
 # -------------------------------------------------------- admin routes --------------------------------------------------------
+# no admin routes will work
 @app.route('/admin')
 def admin_page():
-    return render_template('admin.html')
+    return redirect('/')
+    # return render_template('admin.html')
 
 @app.route('/admin/create_codes', methods=['POST'])
 @app.route('/admin/create_codes/<amount>', methods=['POST'])
 def create_codes(amount = 10000):
-    return codes.generate_codes(amount)
+    return redirect('/')
+    # return codes.generate_codes(amount)
 
 @app.route('/admin/save_codes', methods=['POST'])
 def save_codes():
-    return codes.save_codes()
+    return redirect('/')
+    # return codes.save_codes()
 
 @app.route('/email', methods=['POST'])
 def email():
@@ -104,6 +108,7 @@ def email():
 # -------------------------------------------------------- file upload routes --------------------------------------------------------
 # upload a file
 # will need to change the return statements
+# no admin routes will work
 @app.route('/uploadFile', methods=['POST'])
 def upload_file():
     # print(request)
@@ -131,8 +136,8 @@ def upload_file():
     #         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     #         # file.save(os.path.join(app.config['UPLOAD_FOLDER']))
     #         # return redirect('/admin')
-    # return redirect('/admin')
-    return admins.upload_file(request.files)
+    return redirect('/')
+    # return admins.upload_file(request.files)
 
 # -------------------------------------------------------- customer with code routes --------------------------------------------------------
 @app.route('/enterCode/<code>', methods=['POST'])
