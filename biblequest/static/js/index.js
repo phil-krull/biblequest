@@ -43,6 +43,7 @@ $(window).on('load', function () {
     //     $('.hover_bkgr_register').hide();
     // });
     $('.popupCancel').click(function(){
+        $('.formToReset').closest('form')[0].reset();
         resetAllForms();
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
@@ -111,7 +112,8 @@ $(window).on('load', function () {
             },
             rpassword: {
                 required: true,
-                pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,20}'
+                minlength: (8),
+                pattern:  new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             },
             rconfirm_password: {
                 required: true,
@@ -148,7 +150,8 @@ $(window).on('load', function () {
             },
             rpassword: {
                 required: 'Password field is required!',
-                pattern: 'Password must contain 1 uppercase, 1 lowercase, 1 number and 1 special charater!'
+                minlength: 'Password must be at least 8 characters long',
+                pattern: 'Password must contain 1 uppercase, 1 lowercase, 1 number and 1 special character!'
             },
             rconfirm_password: {
                 required: 'Confirm Password field is required!',
