@@ -5,3 +5,4 @@ uploaded_files/
 *.epgz
 *.mwb
 server.py
+__init__.py
