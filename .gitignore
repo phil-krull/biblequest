@@ -4,5 +4,5 @@ mysqlconnection.py
 uploaded_files/
 *.epgz
 *.mwb
-server.p
+server.py
 __init__.py
