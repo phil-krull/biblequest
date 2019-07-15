@@ -1,24 +1,5 @@
-body {
-    /* background-image: url("./../../images/1500x1500BibleBackdrop.jpg");
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 2600px; */
-    /* background: rgba(73,155,234,1);
-    background: -moz-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(73,155,234,1)), color-stop(100%, rgba(34,23,92,1)));
-    background: -webkit-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    background: -o-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    background: -ms-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    background: radial-gradient(ellipse at center, rgba(73,155,234,1) 0%, rgba(34,23,92,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#22175c', GradientType=1 ); */
-}
 .navbar {
-    /* position: fixed; */
     width: 100%;
-    /* background-color: #22175C; */
-    /* border-bottom: 2px solid #22175C;
-    margin-bottom: 5px; */
 
 }
 .navbar-brand {
@@ -41,14 +22,8 @@ body {
 .navbar-item img {
     box-sizing: content-box;
     width: 100px;
-    /* height: 52px; */
     max-height: 100%;
-    /* top: -12px;
-    left: 0px; */
 }
-/* #products .button_center {
-    min-height: 500px;
-} */
 #products image {
     margin-top: 1.5rem;
 }
@@ -88,28 +63,6 @@ body {
     border-radius: 8px;
     padding: 15px 5%;
 }
-/* .popupCloseButton {
-    background-color: #fff;
-    border: 3px solid #999;
-    border-radius: 50px;
-    cursor: pointer;
-    display: inline-block;
-    font-family: arial;
-    font-weight: bold;
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    font-size: 25px;
-    line-height: 30px;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-}
-.popupCloseButton:hover {
-    background-color: #ccc;
-} */
-/* Popup box END */
-
 
 .tile-background-color {
     background-color: rgb(235,242,252);

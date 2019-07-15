@@ -13,18 +13,18 @@ $(window).on('load', function () {
         }
     });
 
-    $(".navbar-burger").click(function() {
-        // hide the form, if the burger class was closed instead of the cancel button
-        if($('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').is(':visible')){
-            $('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').hide();
-        }
-        toggleBurger();
-        resetAllForms();
-    });
-    $(document).on('click', '.navbar-item:not(.trigger_popup_fricc)', function() {
-        toggleBurger();
-        resetAllForms();
-    })
+    // $(".navbar-burger").click(function() {
+    //     // hide the form, if the burger class was closed instead of the cancel button
+    //     if($('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').is(':visible')){
+    //         $('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').hide();
+    //     }
+    //     toggleBurger();
+    //     resetAllForms();
+    // });
+    // $(document).on('click', '.navbar-item:not(.trigger_popup_fricc)', function() {
+    //     toggleBurger();
+    //     resetAllForms();
+    // })
     
     // $('.navbar-item:not(.trigger_popup_fricc)').click(function(){
     //     console.log('burger item clicked');
@@ -32,17 +32,17 @@ $(window).on('load', function () {
     //     resetAllForms();
     // })
     
-    function toggleBurger() {
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
-    }
+    // function toggleBurger() {
+    //     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    //     $(".navbar-burger").toggleClass("is-active");
+    //     $(".navbar-menu").toggleClass("is-active");
+    // }
 
-    $(".trigger_popup_fricc").click(function(){
-        let form_to_show = $(this).attr('id');
-        console.log(form_to_show);
-       $(`${form_to_show}`).show();
-    });
+    // $(".trigger_popup_fricc").click(function(){
+    //     let form_to_show = $(this).attr('id');
+    //     console.log(form_to_show);
+    //    $(`${form_to_show}`).show();
+    // });
     // $('.hover_bkgr_register').click(function(){
     //     $('.hover_bkgr_register').hide();
     // });
@@ -58,14 +58,14 @@ $(window).on('load', function () {
         $('.hover_bkgr_profile').hide();
         toggleBurger();
     });
-    $('.popupRegister').click(function(){
-        $('.hover_bkgr_register').show();
-        $('.hover_bkgr_login').hide();
-    });
-    $('.popupLogin').click(function(){
-        $('.hover_bkgr_register').hide();
-        $('.hover_bkgr_login').show();
-    });
+    // $('.popupRegister').click(function(){
+    //     $('.hover_bkgr_register').show();
+    //     $('.hover_bkgr_login').hide();
+    // });
+    // $('.popupLogin').click(function(){
+    //     $('.hover_bkgr_register').hide();
+    //     $('.hover_bkgr_login').show();
+    // });
 
     $('.profile').click(function(){
         $('.hover_bkgr_profile').show();
@@ -235,8 +235,8 @@ $(window).on('load', function () {
                 console.log('success response', data);
                 registerValidation.resetForm();
                 $(this).closest('form')[0].reset();
-                toggleBurger();
                 userView();
+                resetAllForms();
             },
             error: (data)=>{
                 console.log('error response', data);
@@ -258,8 +258,8 @@ $(window).on('load', function () {
                 console.log(data);
                 loginValidation.resetForm();
                 $(this).closest('form')[0].reset();
-                toggleBurger();
                 userView(data.products);
+                resetAllForms();
             },
             error: (data)=>{
                 $('#loginEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
@@ -351,14 +351,15 @@ $(window).on('load', function () {
                 console.log(data);
                 $('.logout').addClass('is-hidden');
                 $('#account').addClass('is-hidden');
+                $('#user-form').removeClass('is-hidden');
                 $('.user_products').html('');
                 // $('.navbar-start a:nth-of-type(2)').on('click');
-                $('.navbar-start a:nth-of-type(2)').addClass('trigger_popup_fricc');
-                $(".trigger_popup_fricc").click(function(){
-                    $('.hover_bkgr_register').show();
-                 });
+                // $('.navbar-start a:nth-of-type(2)').addClass('trigger_popup_fricc');
+                // $(".trigger_popup_fricc").click(function(){
+                //     $('.hover_bkgr_register').show();
+                //  });
                 // $('.navbar-start a:nth-of-type(2)').html('Register/Login');
-                $('.navbar-start a:nth-of-type(2)').removeAttr('href');
+                // $('.navbar-start a:nth-of-type(2)').removeAttr('href');
             },
             error:(err)=>{
                 console.log(err);
@@ -369,7 +370,7 @@ $(window).on('load', function () {
     // update user password
     $(document).on('submit', '#profile', function(){
         $.ajax({
-            url: `/editCustomer/${need password here}`,
+            url: `/editCustomer/${need_password_here}`,
             method: 'PUT',
             success: (data)=>{
 
@@ -418,15 +419,17 @@ $(window).on('load', function () {
                                     // <p class="title">${products[i].name}</p>
                                     // <p class="subtitle">Fri 27 Nov 2016</p>
         $('.user_products').html(html_builder);
-        $('.hover_bkgr_register').hide();
-        $('.hover_bkgr_login').hide();
+        // $('.hover_bkgr_register').hide();
+        // $('.hover_bkgr_login').hide();
+        $('#user-form').addClass('is-hidden');
         $('#account').removeClass('is-hidden');
         $('.profile').removeClass('is-hidden');
         $('.logout').removeClass('is-hidden');
-        $('.navbar-start a:nth-of-type(2)').off('click');
-        $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
-        $('.navbar-start a:nth-of-type(2)').addClass('navbar-item');
-        $('.navbar-start a:nth-of-type(2)').attr('href', '#account');
+
+        // $('.navbar-start a:nth-of-type(2)').off('click');
+        // $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
+        // $('.navbar-start a:nth-of-type(2)').addClass('navbar-item');
+        // $('.navbar-start a:nth-of-type(2)').attr('href', '#account');
         // $('.navbar-start a:nth-of-type(2)').html('Account');
         addUserProduct.resetForm();
     }

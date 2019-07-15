@@ -12,27 +12,183 @@
 </head>
 <!-- ---------------------------------------------- start of nav bar ---------------------------------------------- -->
 <body>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        
-        <div id="navbarExampleTransparentExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="http://biblequestclassical.com/">
+    <section class="section">
+        <figure class="image">
+            <img src="{{ url_for('static', filename='images/01_12/Header.png')}}" alt="Placeholder image">
+        </figure>
+    </section>
+    <section class="section">
+        <div class="columns">
+            <div class="column is-1">
+                <a href="https://www.biblequestclassical.com" target="_">
                     Home
                 </a>
-                <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
-                <a class="navbar-item trigger_popup_fricc" id=".hover_bkgr_register">Account</a>
-                
-                <div class="hover_bkgr_register">
-                    <span class="helper"></span>
-                    <div>
+                <a class="logout is-hidden">
+                    Logout
+                </a>
+            </div>
+            <div id="user-form" class="column is-10">
+                <div class="columns">
+                    <div class="column is-6">
+                        <h1 class="title is-3">Register</h1>
                         <form id="register" class="formToReset" action="/registerCustomer" method="post">
+                            <div class="field">
+                                <label for="registerName" class="label">Name</label>
+                                <div class="control">
+                                    <input id="registerName" name="rname" class="input" type="text" placeholder="Name">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerEmail" class="label">Email</label>
+                                <div class="control has-icons-left has-icons-right">
+                                    <input id="registerEmail" name="remail" class="input" type="email" placeholder="Email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerPhoneNumber" class="label">Phone Number</label>
+                                <div class="control">
+                                    <input id="registerPhoneNumber" name="rphone_number" class="input" type="text" placeholder="xxx-xxx-xxxx">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registerAddress" class="label">Address</label>
+                                <div class="control">
+                                    <input id="registerAddress" name="raddress" class="input" type="text" placeholder="Address">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="registercity" class="label">City</label>
+                                <div class="control">
+                                    <input id="registercity" name="rcity" class="input" type="text" placeholder="Enter a City">
+                                </div>
+                            </div>
+                            
+                            <div class="columns">
+                                <div class="field column is-one-thirds">
+                                    <label for="registerState" class="label">State</label>
+                                    <div class="control">
+                                        <select id="registerState" name="rstate" class="input">
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="field column is-one-thirds">
+                                    <label for="registerZip" class="label">Zip Code</label>
+                                    <div class="control">
+                                        <input id="registerZip" name="rzip" class="input" type="number" placeholder="Zip Code">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="registerPassword" class="label">Password</label>
+                        <div class="control">
+                            <input id="registerPassword" name="rpassword" class="input" type="password" placeholder="Enter a Password">
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="registerConfirm_password" class="label">Confirm Password</label>
+                        <div class="control">
+                            <input id="registerConfirm_password" name="rconfirm_password" class="input" type="password" placeholder="Please re-enter password">
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="registerPurpose" class="label">How will you use our product?</label>
+                        <div class="control">
+                            <select id="registerPurpose" name="rpurpose" class="input">
+                                <option selected disabled>Choose an option</option>
+                                <option value="1">Home</option>
+                                <option value="2">Church</option>
+                                <option value="3">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="column is-6">
+                <h1 class="title is-3">Login</h1>
+                <form id="login" class="formToReset" action="/loginCustomer" method="post">
+                    <div class="field">
+                        <label for="loginEmail" class="label">Email</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input id="loginEmail" name="lemail" class="input" type="email" placeholder="Email">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="loginPassword" class="label">Password</label>
+                        <div class="control">
+                            <input id="loginPassword" name="lpassword" class="input" type="password" placeholder="Enter Password">
+                        </div>
+                    </div>
+                    
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
+        <!-- <section id="account" class="section is-hidden"> -->
+            <div class="column is-10 is-hidden" id="account">
+                <div class="container has-text-centered">
+                    <h2 class="title">Account</h2>
+                    <p class="subtitle is-6">This is the file account section for Bible Quest. Logging in here gives you access to any digital content for Bible Quest products that you own. If you have a new product that includes digital content, enter your product key precisely in the box below to activate your files and make them available to download. <span class="has-text-weight-bold">Please Note:</span> This "files account" is a separate account from the account that allows posting comments on the blog or in the forums. A separate log-in for these community resources will be required.</p>
+                    <form class="addUserProduct" action="/addProductToUser">
+                        <div class="field">
+                            <label for="productCode" class="label">Enter Product Code</label>
+                            <div class="control">
+                                    <input id="productCode" class="input" name='acode' type="text" placeholder="code">
+                                </div>
+                            </div>
+                            <div class="control">
+                                <button class="button is-primary">Submit</button>
+                        </div>
+                    </form>
+                    <h4 class='subtitle'>Your products</h4>
+                    <article class="user_products">
+                    </article>
+                </div>
+            </div>
+        <!-- </section> -->
+        </div>
+    </section>
+    <!-- <nav class="navbar"> -->
+            <!-- <div class="navbar-start"> -->
+                <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
+                <!-- <a class="navbar-item trigger_popup_fricc" id=".hover_bkgr_register">Account</a> -->
+                
+                <!-- <div class="hover_bkgr_register">
+                    <span class="helper"></span>
+                    <div> -->
+                        <!-- <form id="register" class="formToReset" action="/registerCustomer" method="post">
                             <div class="field">
                                 <label for="registerName" class="label">Name</label>
                                 <div class="control">
@@ -132,11 +288,11 @@
                                 <button class="popupLogin button is-link is-inverted">Already Registered.....Login.....</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div> -->
                 <!-- ----------------------- End Code for Link to Register via Popup window -----------------------  -->
                 <!-- ----------------------- Code for Link to Login via Popup window -----------------------  -->
-                <div class="hover_bkgr_login">
+                <!-- <div class="hover_bkgr_login">
                     <span class="helper"></span>
                     <div>
                         <form id="login" class="formToReset" action="/loginCustomer" method="post">
@@ -176,7 +332,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- ----------------------- End Code for Link to Login via Popup window -----------------------  -->
                 <!-- Profile section is for updating password, need to finish setup -->
                 <!-- <a class="navbar-item profile trigger_popup_fricc is-hidden" id="#hover_bkgr_profile">
@@ -221,34 +377,13 @@
                         </div>
                     </div>
                 </div>
-                <a class="navbar-item logout is-hidden">
-                    Logout
-                </a>
+                
             </div>
-        </div>
-    </nav>
+        <!-- </div> end of nav-->
+    <!-- </nav> -->
 <!-- ---------------------------------------------- end of nav bar ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
-    <section id="account" class="section is-hidden">
-        <div class="container has-text-centered">
-            <h2 class="title">Account</h2>
-            <p class="subtitle is-6">This is the file account section for Bible Quest. Logging in here gives you access to any digital content for Bible Quest products that you own. If you have a new product that includes digital content, enter your product key precisely in the box below to activate your files and make them available to download. <span class="has-text-weight-bold">Please Note:</span> This "files account" is a separate account from the account that allows posting comments on the blog or in the forums. A separate log-in for these community resources will be required.</p>
-            <form class="addUserProduct" action="/addProductToUser">
-                <div class="field">
-                    <label for="productCode" class="label">Enter Product Code</label>
-                    <div class="control">
-                        <input id="productCode" class="input" name='acode' type="text" placeholder="code">
-                    </div>
-                </div>
-                <div class="control">
-                    <button class="button is-primary">Submit</button>
-                </div>
-            </form>
-            <h4 class='subtitle'>Your products</h4>
-            <article class="user_products">
-            </article>
-        </div>
-    </section>
+
+
 <!-- ---------------------------------------------- end of home ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of contact section ---------------------------------------------- -->
 <!-- contact is hidden, and will show when customer is logged in -->
