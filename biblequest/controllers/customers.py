@@ -65,7 +65,9 @@ class Customers():
                     return jsonify({'status': True, 'message': 'Is user', 'products': user_products})
                     # return redirect('/users')
             else:
-                return jsonify({'status': False, 'message': 'Invalid email/password combination'})
+                resp = jsonify({'status': False, 'message': 'Invalid email/password combination'})
+                resp.status_code = 300
+                return resp
                 # return redirect('/')
 
     def email(self):
@@ -82,4 +84,12 @@ class Customers():
         session.clear()
         return jsonify({'status': True, 'message': 'Successfully logged out'})
 
-    
+    def edit_customer(self, user_id, post_data):
+        result = customer.update_user_password(user_id, post_data)
+        if result:
+            resp = jsonify({'status': True, 'message': 'Password updated'})
+            return resp
+        else:
+            resp = jsonify({'status': False, 'message': 'Could not update password'})
+            resp.status_code = 300
+            return resp

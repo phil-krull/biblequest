@@ -58,7 +58,7 @@ body {
     font-style: bold;
 }
 /* Popup box BEGIN */
-.hover_bkgr_register, .hover_bkgr_login{
+.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile{
     background:rgba(0,0,0,.4);
     cursor:pointer;
     display:none;
@@ -70,12 +70,12 @@ body {
     z-index:10000;
     overflow-y: scroll;
 }
-.hover_bkgr_register .helper{
+.hover_bkgr_register .helper, .hover_bkgr_login .helper, .hover_bkgr_profile .helper{
     display:inline-block;
     height:100%;
     vertical-align:middle;
 }
-.hover_bkgr_register > div, .hover_bkgr_login > div {
+.hover_bkgr_register > div, .hover_bkgr_login > div, .hover_bkgr_profile > div {
     background-color: #fff;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;

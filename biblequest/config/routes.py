@@ -57,22 +57,34 @@ from flask import Flask, render_template, request, redirect, flash, session
 def users_page():
     return render_template('user.html')
 
-
+# register new customer
 @app.route('/registerCustomer', methods=['post'])
 def register_customer():
     return customers.register_customer(request.form)
 
+# login customer
 @app.route('/loginCustomer', methods=['post'])
 def login_customer():
     return customers.login_customer(request.form)
 
+# logout customer
 @app.route('/logout', methods=['post'])
 def logout_customer():
     return customers.logout()
 
+# checks if user is logged in on page reload
 @app.route('/customer')
 def customer_checker():
     return customers.users_page()
+
+# user edit route
+@app.route('/customer/<user_id>', methods=['put'])
+def edit(user_id):
+    return customers.edit_customer(user_id, request.form)
+
+@app.route('/updateCustomer', methods=['post'])
+def update():
+    return customers.update_customer(request.form)
 
 
 # -------------------------------------------------------- admin routes --------------------------------------------------------

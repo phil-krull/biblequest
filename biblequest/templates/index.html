@@ -37,7 +37,7 @@
                     Home
                 </a>
                 <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
-                <a class="navbar-item trigger_popup_fricc">Account</a>
+                <a class="navbar-item trigger_popup_fricc" id=".hover_bkgr_register">Account</a>
                 
                 <div class="hover_bkgr_register">
                     <span class="helper"></span>
@@ -203,6 +203,53 @@
                 <a class="navbar-item" href="https://biblequestcbc.wixsite.com/website/faq" target="_blank">
                     FAQ
                 </a>
+                <a class="navbar-item profile trigger_popup_fricc is-hidden" id="#hover_bkgr_profile">
+                    Profile
+                </a>
+                <div class="hover_bkgr_profile">
+                    <span class="helper"></span>
+                    <div>
+                        <!-- <div class="popupCloseButton">X</div> -->
+                        <!-- <p>Add any HTML content<br />inside the popup box!</p> -->
+                        <form id="profile" class="formToReset" action="/updateCustomer" method="post">
+                            <div class="field">
+                                <label for="new_password" class="label">New Password</label>
+                                <div class="control">
+                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
+                                    <input id="new_password" name="new_password" class="input" type="password" placeholder="Enter New Password">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label for="new_confirm_password" class="label">Confirm New Password</label>
+                                <div class="control">
+                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
+                                    <input id="new_confirm_password" name="new_confirm_password" class="input" type="password" placeholder="Confirm Password Password">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="old_password" class="label">Current Password</label>
+                                <div class="control">
+                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
+                                    <input id="old_password" name="old_password" class="input" type="password" placeholder="Current Password">
+                                </div>
+                            </div>
+                            
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <button class="button is-link">Update Password</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="popupCancel button is-link is-inverted">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <a class="navbar-item logout is-hidden">
                     Logout
                 </a>

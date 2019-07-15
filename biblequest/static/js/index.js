@@ -1,10 +1,12 @@
 
 $(window).on('load', function () {
+    console.log('in window load');
     $.ajax({
         method: 'get',
         dataType: 'json',
         url: '/customer',
         success: function(data){
+            console.log(data);
             if(data.status) {
                 userView(data.products);
             }
@@ -12,6 +14,10 @@ $(window).on('load', function () {
     });
 
     $(".navbar-burger").click(function() {
+        // hide the form, if the burger class was closed instead of the cancel button
+        if($('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').is(':visible')){
+            $('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').hide();
+        }
         toggleBurger();
         resetAllForms();
     });
@@ -33,7 +39,9 @@ $(window).on('load', function () {
     }
 
     $(".trigger_popup_fricc").click(function(){
-       $('.hover_bkgr_register').show();
+        let form_to_show = $(this).attr('id');
+        console.log(form_to_show);
+       $(`${form_to_show}`).show();
     });
     // $('.hover_bkgr_register').click(function(){
     //     $('.hover_bkgr_register').hide();
@@ -47,6 +55,7 @@ $(window).on('load', function () {
         resetAllForms();
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
+        $('.hover_bkgr_profile').hide();
         toggleBurger();
     });
     $('.popupRegister').click(function(){
@@ -58,6 +67,10 @@ $(window).on('load', function () {
         $('.hover_bkgr_login').show();
     });
 
+    $('.profile').click(function(){
+        $('.hover_bkgr_profile').show();
+    })
+
 
     let loginValidation = $('#login').validate({
         rules: {
@@ -66,8 +79,7 @@ $(window).on('load', function () {
                 email: true
             },
             lpassword: {
-                required: true,
-                pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,20}'
+                required: true
             }
         },
         messages: {
@@ -76,8 +88,7 @@ $(window).on('load', function () {
                 email: 'Please enter a valid email!'
             },
             lpassword: {
-                required: 'Password field is required!',
-                pattern: 'Password must contain 1 uppercase, 1 lowercase, 1 number and 1 special charater!'
+                required: 'Password field is required!'
             }
         },
         //adding bulma error message class
@@ -112,8 +123,7 @@ $(window).on('load', function () {
             },
             rpassword: {
                 required: true,
-                minlength: (8),
-                pattern:  new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+                minlength: (8)
             },
             rconfirm_password: {
                 required: true,
@@ -150,12 +160,11 @@ $(window).on('load', function () {
             },
             rpassword: {
                 required: 'Password field is required!',
-                minlength: 'Password must be at least 8 characters long',
-                pattern: 'Password must contain 1 uppercase, 1 lowercase, 1 number and 1 special character!'
+                minlength: 'Password must be at least 8 characters long'
             },
             rconfirm_password: {
                 required: 'Confirm Password field is required!',
-                pattern: 'Passwords must match'
+                equalTo: 'Passwords must match'
             },
             rpurpose: {
                 required: 'Please enter an option!'
@@ -180,6 +189,32 @@ $(window).on('load', function () {
         },
         //adding bulma error message class
         errorClass: 'help is-danger'
+    })
+
+    let updateUserPassword = $('#profile').validate({
+        rules: {
+            new_password :{
+                required: true,
+                minlength: (8)
+            },
+            new_confirm_password: {
+                required: true,
+                equalTo: '#new_password'
+            },
+            old_password: {
+                required: true
+            }
+        },
+        messages: {
+            new_password: {
+                required: 'Please enter a password',
+                minlength: 'Password must be at least 8 characters long',
+            },
+            new_confirm_password: {
+                required: 'Please enter a password',
+                equalTo: 'Passwords must match'
+            }
+        }
     })
 
     let resetAllForms = function () {
@@ -372,6 +407,7 @@ $(window).on('load', function () {
         $('.hover_bkgr_register').hide();
         $('.hover_bkgr_login').hide();
         $('#account').removeClass('is-hidden');
+        $('.profile').removeClass('is-hidden');
         $('.logout').removeClass('is-hidden');
         $('.navbar-start a:nth-of-type(2)').off('click');
         $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
