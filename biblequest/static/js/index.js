@@ -366,6 +366,20 @@ $(window).on('load', function () {
         })
     })
 
+    // update user password
+    $(document).on('submit', '#profile', function(){
+        $.ajax({
+            url: `/editCustomer/${need password here}`,
+            method: 'PUT',
+            success: (data)=>{
+
+            },
+            error: (err)=>{
+                
+            }
+        })
+    })
+
     function buildUserProduct(product) {
         let davidMMChecker = '';
         if(product.name == 'davids_mighty_men'){

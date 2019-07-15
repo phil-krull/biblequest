@@ -6,24 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bible Quest</title>
-    <!-- <link rel="shortcut icon" href="../images/fav_icon.png" type="image/x-icon"> -->
-    <!-- Bulma Version 0.7.1-->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" /> -->
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style/css/mystyles.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/css/mystyles.css') }}">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style/css/bulma.min.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/css/index.css') }}">
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js"></script>
-    <!-- <script src="{{ url_for('static', filename='js/index.js') }}"></script> -->
 </head>
 <!-- ---------------------------------------------- start of nav bar ---------------------------------------------- -->
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <!-- <a class="navbar-item" href="/">
-                <img src="{{ url_for('static', filename='images/WebsiteHeader2018.png') }}" alt="Bible Quest">
-            </a> -->
-            <!-- make drop down menu for mobile -->
             <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
                 <span></span>
                 <span></span>
@@ -33,7 +23,7 @@
         
         <div id="navbarExampleTransparentExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="#home">
+                <a class="navbar-item" href="http://biblequestclassical.com/">
                     Home
                 </a>
                 <!-- ----------------------- Code for Link to Register/Login via Popup window -----------------------  -->
@@ -149,8 +139,6 @@
                 <div class="hover_bkgr_login">
                     <span class="helper"></span>
                     <div>
-                        <!-- <div class="popupCloseButton">X</div> -->
-                        <!-- <p>Add any HTML content<br />inside the popup box!</p> -->
                         <form id="login" class="formToReset" action="/loginCustomer" method="post">
                             <div class="field">
                                 <label for="loginEmail" class="label">Email</label>
@@ -168,7 +156,6 @@
                             <div class="field">
                                 <label for="loginPassword" class="label">Password</label>
                                 <div class="control">
-                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
                                     <input id="loginPassword" name="lpassword" class="input" type="password" placeholder="Enter Password">
                                 </div>
                             </div>
@@ -191,31 +178,17 @@
                     </div>
                 </div>
                 <!-- ----------------------- End Code for Link to Login via Popup window -----------------------  -->
-                <a class="navbar-item" href="https://biblequestcbc.wixsite.com/website/web-store" target="_blank">
-                    Products
-                </a>
-                <a class="navbar-item" href="#resources">
-                    Resources/Community
-                </a>
-                <a class="navbar-item" href="#contact">
-                    Contact
-                </a>
-                <a class="navbar-item" href="https://biblequestcbc.wixsite.com/website/faq" target="_blank">
-                    FAQ
-                </a>
-                <a class="navbar-item profile trigger_popup_fricc is-hidden" id="#hover_bkgr_profile">
+                <!-- Profile section is for updating password, need to finish setup -->
+                <!-- <a class="navbar-item profile trigger_popup_fricc is-hidden" id="#hover_bkgr_profile">
                     Profile
-                </a>
+                </a> -->
                 <div class="hover_bkgr_profile">
                     <span class="helper"></span>
                     <div>
-                        <!-- <div class="popupCloseButton">X</div> -->
-                        <!-- <p>Add any HTML content<br />inside the popup box!</p> -->
                         <form id="profile" class="formToReset" action="/updateCustomer" method="post">
                             <div class="field">
                                 <label for="new_password" class="label">New Password</label>
                                 <div class="control">
-                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
                                     <input id="new_password" name="new_password" class="input" type="password" placeholder="Enter New Password">
                                 </div>
                             </div>
@@ -223,7 +196,6 @@
                             <div class="field">
                                 <label for="new_confirm_password" class="label">Confirm New Password</label>
                                 <div class="control">
-                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
                                     <input id="new_confirm_password" name="new_confirm_password" class="input" type="password" placeholder="Confirm Password Password">
                                 </div>
                             </div>
@@ -231,7 +203,6 @@
                             <div class="field">
                                 <label for="old_password" class="label">Current Password</label>
                                 <div class="control">
-                                    <!-- must contain 1 upper, 1 lower, 1 number and 1 special char -->
                                     <input id="old_password" name="old_password" class="input" type="password" placeholder="Current Password">
                                 </div>
                             </div>
@@ -257,110 +228,6 @@
         </div>
     </nav>
 <!-- ---------------------------------------------- end of nav bar ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of hero section ---------------------------------------------- -->
-    <!-- <section class="hero">
-        <figure class="image"> -->
-            <!-- <img src="https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"> -->
-        <!-- </figure>
-    </section> -->
-<!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of home section ---------------------------------------------- -->
-    <!-- <section id="home" class="section">
-        <div class="container has-text-centered">
-            <h2 class="title is-size-1 has-text-weight-semibold has-text-white">Bible Quest</h2>
-            <h3 class="subtitle has-text-white has-text-weight-semibold is-size-4">Bible Quest empowers parents to teach their children to use God's Word as the FOUNDATION for their thought process!</h3>
-            <div class="columns is-centered">
-                <div class="content has-text-left column is-three-quarters has-text-white has-text-weight-semibold">
-                    <ul>
-                        <li>EQUIP all learners with knowledge through memorization.
-                            <ul>
-                                <li>Verses set to music and the Big Bible Story Song help kids remember Scripture and Biblical chronology.</li>
-                                <li>Simple facts about people in the Bible underscore God's interactions with them.</li>
-                                <li>Maps of important places reinforce the historical reality of the Biblical accounts.</li>
-                            </ul>
-                        </li>
-                        <li>EMPOWER older students with Explorations and Exercises to enhance Biblical understanding.</li>
-                        <li>EXPEDITIONS focus on wisdom development for teens and advanced learners.</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="columns" style="padding: 2rem">
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by1">
-                                    <img src="{{ url_for('static', filename='images/new_images/EquipWebsite2018.png')}}" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content border-dark"> -->
-                                <!-- <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-4">John Smith</p>
-                                        <p class="subtitle is-6">@johnsmith</p>
-                                    </div>
-                                </div> -->
-                                
-                                <!-- <div class="content">
-                                    The Equip Phase builds biblical knowledge through memorization. Maximize and master memorized content with active, visual, and audio elements!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by1">
-                                    <img src="{{ url_for('static', filename='images/new_images/EmpowerWebsite2018.png')}}" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content"> -->
-                                <!-- <div class="media">
-                                    <div class="media-content">
-                                        <p class="title is-4">John Smith</p>
-                                        <p class="subtitle is-6">@johnsmith</p>
-                                    </div>
-                                </div> -->
-                                
-                                <!-- <div class="content">
-                                    The Empower Phase aims to develop student understanding through Explorations and Exercises. Explorations involve questions and activities that help students think Biblically. Exercises provide practice using Biblical information with speed and accuracy.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by1">
-                                    <img src="{{ url_for('static', filename='images/new_images/ExpeditionWebsite2018.png')}}" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="card-content"> -->
-                                <!-- <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <p class="subtitle is-6">@johnsmith</p>
-                                </div> -->
-                                <!-- <div class="content">
-                                    Expeditions help students of the Bible to use what they know and understand to communicate biblical truth to others. By engaging with Biblical truth under the guidance of a mentor, students develop biblical wisdom.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section> -->
-    <figure class="image">
-        <img src="{{ url_for('static', filename='images/01_12/Header.png')}}" alt="Placeholder image"" alt="">
-    </figure>
-    <figure class="image">
-        <img src="{{ url_for('static', filename='images/01_12/Section 2 with text.png')}}" alt="Placeholder image"" alt="">
-    </figure>
-    <figure class="image">
-        <img src="{{ url_for('static', filename='images/01_12/Section 3.png')}}" alt="Placeholder image"" alt="">
-    </figure>
-    <figure class="image">
-        <img src="{{ url_for('static', filename='images/01_12/Section 4.png')}}" alt="Placeholder image"" alt="">
-    </figure>
-<!-- ---------------------------------------------- end of hero ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of account section ---------------------------------------------- -->
     <section id="account" class="section is-hidden">
         <div class="container has-text-centered">
@@ -383,140 +250,9 @@
         </div>
     </section>
 <!-- ---------------------------------------------- end of home ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of products section ---------------------------------------------- -->
-    <!-- <section id="products" class="section tile-background-color">
-        <div class="container has-text-centered">
-            <h2 class="title">Products</h2>
-            
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 Church Kit.png')}}" alt="church edition">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/7716297" target="_blank">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT-NT Kit.png')}}" alt="deluxe kit">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6818889" target="_blank">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/new_testament.png')}}" alt="new testament kit">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/5956859" target="_blank">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/old_testament.png')}}" alt="old testament kit">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/5956856" target="_blank">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/davids_mighty_men.png')}}" alt="david's mighty men">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6794399" target="_blank">Purchase</a>
-                    </article>
-                </div>
-            </div>
-            
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/bible_girls_party.png')}}" alt="bible girls party">
-                            </figure>
-                        <a class="button tile-background-color" href="https://biblequest.webs.com/apps/webstore/products/show/6794404" target="_blank">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT CD.png')}}" alt="new testament cd">
-                            </figure>
-                        <a class="button tile-background-color">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT CD.png')}}" alt="old testament cd">
-                            </figure>
-                        <a class="button tile-background-color">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 NT Cards.png')}}" alt="new testemant card deck">
-                            </figure>
-                        <a class="button tile-background-color">Purchase</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box">
-                            <figure class="image box is-paddingless">
-                                <img src="{{ url_for('static', filename='images/01_12/Product 2018 OT Cards.png')}}" alt="old testemant card deck">
-                            </figure>
-                        <a class="button tile-background-color">Purchase</a>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section> -->
-<!-- ---------------------------------------------- end of products ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of resources section ---------------------------------------------- -->
-    <section id="resources" class="section">
-        <div class="container has-text-centered">
-            <h2 class="title">Resources/Community</h2>
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child box tile-background-color">
-                        <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/01_12/BlogIcon2018.jpg')}}" alt="">
-                        </figure>
-                        <p class="title">Blog</p>
-                        <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button  is-warning has-text-white has-text-weight-bold" href="https://biblequestcbc.wixsite.com/website/blog" target="_blank">Go</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box tile-background-color">
-                        <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/01_12/ForumIcon2018.jpg')}}" alt="">
-                        </figure>
-                        <p class="title">Forums</p>
-                        <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button  is-warning has-text-white has-text-weight-bold" href="https://biblequestcbc.wixsite.com/website/forum" target="_blank">Go</a>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child box tile-background-color">
-                        <figure class="image box is-paddingless">
-                            <img src="{{ url_for('static', filename='images/new_images/StoreIcon.png')}}" alt="">
-                        </figure>
-                        <p class="title">Store</p>
-                        <!-- <p class="subtitle">Fri 27 Nov 2016</p> -->
-                        <a class="button is-warning has-text-white has-text-weight-bold" href="https://biblequestcbc.wixsite.com/website/web-store" target="_blank">Go</a>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- ---------------------------------------------- end of products ---------------------------------------------- -->
 <!-- ---------------------------------------------- start of contact section ---------------------------------------------- -->
-    <section id="contact" class="section columns tile-background-color is-marginless">
+<!-- contact is hidden, and will show when customer is logged in -->
+    <!-- <section id="contact" class="section columns tile-background-color is-marginless">
         <div class="container has-text-centered column is-10 is-offset-1">
             <h2 class="title">Contact</h2>
             
@@ -565,21 +301,8 @@
                 </div>
             </form>
         </div>
-    </section>
+    </section> -->
 <!-- ---------------------------------------------- end of contact ---------------------------------------------- -->
-<!-- ---------------------------------------------- start of footer ---------------------------------------------- -->
-    <footer class="footer is-white">
-        <div class="container">
-            <div class="content has-text-centered">
-                <p>
-                    <a href="https://www.facebook.com/biblequestcbc/" target="_blank">
-                        <i class="fab fa-facebook-square fa-2x"></i>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </footer>
-    <!-- ---------------------------------------------- end of footer ---------------------------------------------- -->
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/validate.js') }}"></script>
     <script src="{{ url_for('static', filename='js/validate-additional.js') }}"></script>
