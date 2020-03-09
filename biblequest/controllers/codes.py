@@ -1,6 +1,7 @@
 from biblequest.models.code import Code
 from flask import redirect, send_from_directory, session, jsonify
 from biblequest import app
+from biblequest.config.cjwt import current_identity
 
 code = Code()
 
@@ -18,7 +19,8 @@ class Codes():
         # print('*'*100)
         # set product to user
         # result = code.set_user_product(session['user_id'], product_code)
-        check_product = code.get_user_product(session['user_id'], product_code)
+        user_id = current_identity['customer_id']
+        check_product = code.get_user_product(user_id, product_code)
         # print('^'*90)
         # print(check_product)
         if len(check_product) > 0:
@@ -37,7 +39,8 @@ class Codes():
     def get_user_products(self, user_id):
         pass
 
-    def set_user_products(self, user_id, product_code):
+    def set_user_products(self, product_code):
+        user_id = current_identity['customer_id']
         check_product = code.get_user_product(user_id, product_code)
         # print('+'*90)
         # print(len(check_product))

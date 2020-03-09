@@ -1,88 +1,49 @@
 from biblequest import app
-# from flask_bcrypt import Bcrypt
-# for file upload
-# from werkzeug.utils import secure_filename
-
+from flask import Flask, render_template, request, redirect, flash, session
 from biblequest.controllers.customers import Customers # import the class
 from biblequest.controllers.codes import Codes
 from biblequest.controllers.admins import Admins
+from biblequest.config.cjwt import jwt_required, current_identity
 
 customers = Customers()
 codes = Codes()
 admins = Admins()
 
-# from flask_mail import Mail, Message
 
-
-# import os
-from flask import Flask, render_template, request, redirect, flash, session
-
-# print(os.path.abspath(os.path.dirname(__file__)))
-# print('+'*90)
-# UPLOAD_FILES = os.path.abspath(os.path.dirname(__file__)) + '/uploaded_files'
-# ALLOWED_EXTENSIONS = set(['zip'])
-
-# app = Flask(__name__)
-
-#set up mail server
-# app.config.update(dict(
-#     DEBUG = True,
-#     MAIL_SERVER = 'smtp.gmail.com',
-#     MAIL_PORT = 587,
-#     MAIL_USE_TLS = True,
-#     MAIL_USE_SSL = False,
-#     MAIL_USERNAME = 'pkrull@codingdojo.com',
-#     MAIL_PASSWORD = 'BowHunter24',
-# ))
-
-# mail = Mail(app)
-
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FILES
-# app.secret_key = 'My super secret key'
-
-# bcrypt = Bcrypt(app)
-
-
-
-# -------------------------------------------------------- customer routes --------------------------------------------------------
-# do not need when using front end frame work
-# @app.route('/register')
-# def register():
-#     mysql = connectToMySQL('bible_quest')
-#     query = 'SELECT role_id, type FROM roles;'
-#     roles = mysql.query_db(query)
-
-#     return render_template('register.html', roles = roles)
-@app.route('/users')
-def users_page():
-    return render_template('user.html')
+# @app.route('/users')
+# def users_page():
+#     return render_template('user.html')
 
 # register new customer
 @app.route('/registerCustomer', methods=['post'])
 def register_customer():
     return customers.register_customer(request.form)
 
-# login customer
-@app.route('/loginCustomer', methods=['post'])
-def login_customer():
-    return customers.login_customer(request.form)
+# login customer handle in the /auth route
+# @app.route('/loginCustomer', methods=['post'])
+# def login_customer():
+#     return customers.login_customer(request.form)
 
 # logout customer
-@app.route('/logout', methods=['post'])
-def logout_customer():
-    return customers.logout()
+# @app.route('/logout', methods=['post'])
+# @jwt_required()
+# def logout_customer():
+#     print('^'*90)
+#     return customers.logout()
 
-# checks if user is logged in on page reload
-@app.route('/customer')
+# display user page
+@app.route('/customer_page')
+@jwt_required()
 def customer_checker():
     return customers.users_page()
 
 # user edit route
-@app.route('/customer/<user_id>', methods=['put'])
-def edit(user_id):
-    return customers.edit_customer(user_id, request.form)
+# @app.route('/customer/<user_id>', methods=['put'])
+# def edit(user_id):
+#     return customers.edit_customer(user_id, request.form)
 
 @app.route('/updateCustomer', methods=['post'])
+@jwt_required()
 def update():
     return customers.update_customer(request.form)
 
@@ -153,13 +114,15 @@ def upload_file():
 
 # -------------------------------------------------------- customer with code routes --------------------------------------------------------
 @app.route('/enterCode/<code>', methods=['POST'])
+@jwt_required()
 def product_code(code):
     return codes.get_product(code, request.form['name'])
 
 # need to authenticate this route
 @app.route('/addProductToUser', methods=['POST'])
+@jwt_required()
 def addProductToUser():
-    return codes.set_user_products(session['user_id'], request.form['acode'])
+    return codes.set_user_products(request.form['acode'])
 
 # -------------------------------------------------------- root routes --------------------------------------------------------
 # @app.route('/')

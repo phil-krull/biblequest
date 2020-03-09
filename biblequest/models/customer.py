@@ -3,8 +3,25 @@ from flask import jsonify, session
 import re
 from biblequest import app
 from flask_bcrypt import Bcrypt
+from biblequest.config.cjwt import JWT
 
 bcrypt = Bcrypt(app)
+
+def authenticate(email, password):
+    try:
+        user = customer.get_user_by_email(email)[0]
+
+        if user and customer.verify_password(user['password'], password):
+            return user
+    except:
+        pass
+
+def identity(payload):
+    return customer.get_user_by_id(payload['identity'])
+
+jwt = JWT(app, authenticate, identity)
+
+# from biblequest import app, bcrypt
 
 class Customer:
     def validate_user(self, user_info):
@@ -45,14 +62,18 @@ class Customer:
         data = {'email': user_email}
         return mysql.query_db(query, data)
 
+    def get_user_by_id(self, user_id):
+        mysql = connectToMySQL('bible_quest')
+        query = 'SELECT * FROM customers WHERE customer_id = %(user_id)s';
+        data = {
+            'user_id': user_id
+        }
+        return mysql.query_db(query, data)[0]
+
     def validate_password(self, password):
         return re.match('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})', password)
 
     def verify_password(self, saved_password, form_password):
-        # print('saved_password')
-        # print(saved_password)
-        # print('form_password')
-        # print(form_password)
         if bcrypt.check_password_hash(saved_password, form_password):
             return True
         else:
@@ -92,3 +113,5 @@ class Customer:
             return False
         # find user by id, and verify current password
         # hash new password and save the update
+
+customer = Customer()

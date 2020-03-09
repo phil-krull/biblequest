@@ -1,75 +1,21 @@
-
 $(window).on('load', function () {
-    console.log('in window load');
-    $.ajax({
-        method: 'get',
-        dataType: 'json',
-        url: '/customer',
-        success: function(data){
-            console.log(data);
-            if(data.status) {
-                userView(data.products);
-            }
-        }
-    });
-
-    // $(".navbar-burger").click(function() {
-    //     // hide the form, if the burger class was closed instead of the cancel button
-    //     if($('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').is(':visible')){
-    //         $('.hover_bkgr_register, .hover_bkgr_login, .hover_bkgr_profile').hide();
+    console.log(sessionStorage.getItem('access_token'));
+    userView();
+    // $.ajax({
+    //     method: 'get',
+    //     dataType: 'json',
+    //     url: '/customer',
+    //     success: function(data){
+    //         console.log(data);
+    //         if(data.status) {
+    //             userView(data.products);
+    //         }
     //     }
-    //     toggleBurger();
-    //     resetAllForms();
-    // });
-    // $(document).on('click', '.navbar-item:not(.trigger_popup_fricc)', function() {
-    //     toggleBurger();
-    //     resetAllForms();
-    // })
-    
-    // $('.navbar-item:not(.trigger_popup_fricc)').click(function(){
-    //     console.log('burger item clicked');
-    //     toggleBurger();
-    //     resetAllForms();
-    // })
-    
-    // function toggleBurger() {
-    //     // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    //     $(".navbar-burger").toggleClass("is-active");
-    //     $(".navbar-menu").toggleClass("is-active");
-    // }
-
-    // $(".trigger_popup_fricc").click(function(){
-    //     let form_to_show = $(this).attr('id');
-    //     console.log(form_to_show);
-    //    $(`${form_to_show}`).show();
-    // });
-    // $('.hover_bkgr_register').click(function(){
-    //     $('.hover_bkgr_register').hide();
-    // });
-    // remove upper left corner x button
-    // $('.popupCloseButton').click(function(){
-    //     $('.hover_bkgr_register').hide();
-    // });
-    $('.popupCancel').click(function(){
-        $('.formToReset').closest('form')[0].reset();
-        resetAllForms();
-        $('.hover_bkgr_register').hide();
-        $('.hover_bkgr_login').hide();
-        $('.hover_bkgr_profile').hide();
-        toggleBurger();
-    });
-    // $('.popupRegister').click(function(){
-    //     $('.hover_bkgr_register').show();
-    //     $('.hover_bkgr_login').hide();
-    // });
-    // $('.popupLogin').click(function(){
-    //     $('.hover_bkgr_register').hide();
-    //     $('.hover_bkgr_login').show();
     // });
 
-    $('.profile').click(function(){
-        $('.hover_bkgr_profile').show();
-    })
+    // $('.profile').click(function(){
+    //     $('.hover_bkgr_profile').show();
+    // })
 
 
     let loginValidation = $('#login').validate({
@@ -94,7 +40,7 @@ $(window).on('load', function () {
         //adding bulma error message class
         errorClass: 'help is-danger'
     });
-    
+
     let registerValidation = $('#register').validate({
         rules: {
             rname: {
@@ -232,153 +178,171 @@ $(window).on('load', function () {
             dataType: 'json',
             url: '/registerCustomer',
             success: (data)=>{
-                console.log('success response', data);
-                registerValidation.resetForm();
                 $(this).closest('form')[0].reset();
                 userView();
                 resetAllForms();
             },
             error: (data)=>{
-                console.log('error response', data);
-                $('#registerEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
+                registerValidation.showErrors({
+                    'remail': 'Email already in use'
+                })
             }
         })
     })
     
     $(document).on('submit', '#login', function(e){
-        console.log(this);
+        let email = $('#loginEmail').val();
+        let password = $('#loginPassword').val();
+        let test = JSON.stringify({
+            "email": `${email}`,
+            "password": `${password}`
+        });
         // use jquery-plugin validator
         e.preventDefault();
         $.ajax({
+            url: '/auth',
             method: 'post',
-            data: $(this).serialize(),
-            dataType: 'json',
-            url: '/loginCustomer',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: test,
             success: (data)=>{
                 console.log(data);
-                loginValidation.resetForm();
+                sessionStorage.setItem("access_token", data.access_token);
                 $(this).closest('form')[0].reset();
                 userView(data.products);
                 resetAllForms();
             },
             error: (data)=>{
-                $('#loginEmail').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
-                console.log('error response', data);
+                loginValidation.showErrors({
+                    'lpassword': 'Invalid email/password combination'
+                });
             }
         })
     })
 
     // add user product and display newly added product
     $(document).on('submit', '.addUserProduct', function(e){
-        console.log(this);
-        let tile_ancestor = $('.user_products .tile ancestor:last').length
-        console.log(tile_ancestor);
-        console.log('*'.repeat(90));
-        e.preventDefault();
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: $(this).serialize(),
-            success: (data)=>{
-                console.log('success data: ', data);
-                $(this).closest('form')[0].reset();
-                let html_string = buildUserProduct(data['product']);
-                let tile_ancestor_length = $('.user_products .is-ancestor:last').children().length
-                if(tile_ancestor_length > 3) {
-                    html_string = '<div class="tile is-ancestor">' + html_string + '</div>';
-                    // $('.user_products').append('<div class="tile is-ancestor">');
-                    $('.user_products').append(html_string);
-                    // $('.user_products').append('</div>');
-                } else {
-                    $('.user_products .is-ancestor:last').append(html_string);
+        let tile_ancestor = $('.user_products .tile ancestor:last').length;
+        let token = sessionStorage.getItem('access_token');
+        if(token) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: $(this).serialize(),
+                headers: {
+                    'Authorization': `JWT ${token}`
+                },
+                success: (data)=>{
+                    $(this).closest('form')[0].reset();
+                    let html_string = buildUserProduct(data['product']);
+                    let tile_ancestor_length = $('.user_products .is-ancestor:last').children().length
+                    if(tile_ancestor_length > 3) {
+                        html_string = '<div class="tile is-ancestor">' + html_string + '</div>';
+                        $('.user_products').append(html_string);
+                    } else {
+                        $('.user_products .is-ancestor:last').append(html_string);
+                    }
+                    $('.product_error').remove();
+                    addUserProduct.resetForm();
+                },
+                error: (data)=>{
+                    console.log('error response: ', data);
+                    // add error message to form
+                    if($('.product_error').length < 1) {
+                        $('#productCode').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
+                    }
                 }
-                // $('.user_products').append(html_string);
-                $('.product_error').remove();
-                addUserProduct.resetForm();
-            },
-            error: (data)=>{
-                console.log('error response: ', data);
-                // add error message to form
-                if($('.product_error').length < 1) {
-                    $('#productCode').after(`<p class='help is-danger product_error'>${data.responseJSON.message}</p>`);
-                }
-            }
-        });
+            });
+        }
     })
 
     // download user product
     $(document).on('submit', '.downloadUserProduct', function(e){
-        $(this).closest('form').find(':submit').addClass('is-loading');
-        let product_name = $(this).find('input[name="name"]').val();
-        e.preventDefault();
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: $(this).serialize(),
-            xhrFields: {
-                responseType: 'blob'
-            },
-            success: (data)=>{
-                console.log('success data: ', data);
-                var a = document.createElement('a');
-                var url = window.URL.createObjectURL(data);
-                a.href = url;
-                // need to make the download field dynamic
-                // need update the userView with the just added product
-                a.download = `${product_name}.zip`;
-                a.click();
-                window.URL.revokeObjectURL(url);
-                $(this).closest('form')[0].reset();
-                $('.product_error').remove();
-                addUserProduct.resetForm();
-                $(this).closest('form').find(':submit').removeClass('is-loading');
-            },
-            error: (data)=>{
-                console.log('error response: ', data);
-                // add error message to form
-                if($('.product_error').length < 1) {
-                    $('#productCode').after(`<p class='help is-danger product_error'>Please enter a valid Product code</p>`);
+        let token = sessionStorage.getItem('access_token');
+        if(token) {
+            $(this).closest('form').find(':submit').addClass('is-loading');
+            let product_name = $(this).find('input[name="name"]').val();
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: $(this).serialize(),
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                headers: {
+                    'Authorization': `JWT ${token}`
+                },
+                success: (data)=>{
+                    var a = document.createElement('a');
+                    var url = window.URL.createObjectURL(data);
+                    a.href = url;
+                    // need to make the download field dynamic
+                    // need update the userView with the just added product
+                    a.download = `${product_name}.zip`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    $(this).closest('form')[0].reset();
+                    $('.product_error').remove();
+                    addUserProduct.resetForm();
+                    $(this).closest('form').find(':submit').removeClass('is-loading');
+                },
+                error: (data)=>{
+                    // add error message to form
+                    if($('.product_error').length < 1) {
+                        $('#productCode').after(`<p class='help is-danger product_error'>Please enter a valid Product code</p>`);
+                    }
                 }
-            }
-        });
+            });
+        }
     })
 
     $(document).on('click', '.logout', function(){
-        $.ajax({
-            url: '/logout',
-            method: 'POST',
-            success: (data)=>{
-                console.log(data);
-                $('.logout').addClass('is-hidden');
-                $('#account').addClass('is-hidden');
-                $('#user-form').removeClass('is-hidden');
-                $('.user_products').html('');
-                // $('.navbar-start a:nth-of-type(2)').on('click');
-                // $('.navbar-start a:nth-of-type(2)').addClass('trigger_popup_fricc');
-                // $(".trigger_popup_fricc").click(function(){
-                //     $('.hover_bkgr_register').show();
-                //  });
-                // $('.navbar-start a:nth-of-type(2)').html('Register/Login');
-                // $('.navbar-start a:nth-of-type(2)').removeAttr('href');
-            },
-            error:(err)=>{
-                console.log(err);
-            }
-        })
+        // let access_token = sessionStorage.getItem("access_token");
+        // $.ajax({
+        //     url: '/logout',
+        //     method: 'POST',
+        //     headers: {
+        //         'Authorization': `JWT ${access_token}`
+        //     },
+        //     success: (data)=>{
+        //         console.log(data);
+        //         $('.logout').addClass('is-hidden');
+        //         $('#account').addClass('is-hidden');
+        //         $('#user-form').removeClass('is-hidden');
+        //         $('.user_products').html('');
+        //     },
+        //     error:(err)=>{
+        //         console.log(err);
+        //     }
+        // })
+        sessionStorage.removeItem('access_token');
+        $('.logout').addClass('is-hidden');
+        // $('#account').addClass('is-hidden');
+        $('#user-form').removeClass('is-hidden');
+        $('.user_products').html('');
     })
 
     // update user password
     $(document).on('submit', '#profile', function(){
-        $.ajax({
-            url: `/editCustomer/${need_password_here}`,
-            method: 'PUT',
-            success: (data)=>{
-
-            },
-            error: (err)=>{
-                
-            }
-        })
+        let token = sessionStorage.getItem('access_token');
+        if(token) {
+            $.ajax({
+                url: `/editCustomer/${need_password_here}`,
+                method: 'PUT',
+                headers: {
+                    'Authorization': `JWT ${token}`
+                },
+                success: (data)=>{
+                    
+                },
+                error: (err)=>{
+                    
+                }
+            })
+        }
     })
 
     function buildUserProduct(product) {
@@ -403,34 +367,266 @@ $(window).on('load', function () {
         </div>`
     }
 
-    function userView(products = null) {
+    function buildUserView(products) {
         let html_builder = '<div class="tile is-ancestor">';
-        if(products) {
-            let j = 0;
-            for(let i = 0; i < products.length; i++) {
-                html_builder += buildUserProduct(products[i]);
-                j++;
-                if(j%4 == 0 && i + 1 != products.length) {
-                    html_builder += '</div><div class="tile is-ancestor">';
-                }
+        let j = 0;
+        for(let i = 0; i < products.length; i++) {
+            html_builder += buildUserProduct(products[i]);
+            j++;
+            if(j%4 == 0 && i + 1 != products.length) {
+                html_builder += '</div><div class="tile is-ancestor">';
             }
-            html_builder += '</div>';
         }
-                                    // <p class="title">${products[i].name}</p>
-                                    // <p class="subtitle">Fri 27 Nov 2016</p>
+        html_builder += '</div>';
         $('.user_products').html(html_builder);
-        // $('.hover_bkgr_register').hide();
-        // $('.hover_bkgr_login').hide();
         $('#user-form').addClass('is-hidden');
-        $('#account').removeClass('is-hidden');
-        $('.profile').removeClass('is-hidden');
+        // $('#account').removeClass('is-hidden');
+        // $('.profile').removeClass('is-hidden');
         $('.logout').removeClass('is-hidden');
+        // addUserProduct.resetForm();
+    }
 
-        // $('.navbar-start a:nth-of-type(2)').off('click');
-        // $('.navbar-start a:nth-of-type(2)').removeClass('trigger_popup_fricc');
-        // $('.navbar-start a:nth-of-type(2)').addClass('navbar-item');
-        // $('.navbar-start a:nth-of-type(2)').attr('href', '#account');
-        // $('.navbar-start a:nth-of-type(2)').html('Account');
-        addUserProduct.resetForm();
+    function userView() {
+        let token = sessionStorage.getItem('access_token');
+        accountView();
+        if(token) {
+            $.ajax({
+                method: 'get',
+                dataType: 'json',
+                url: '/customer_page',
+                headers: {
+                    'Authorization': `JWT ${token}`
+                },
+                success: function(data){
+                    console.log(data);
+                    buildUserView(data.products);
+                },
+                error: function(err) {
+                    console.log(err);
+                    sessionStorage.removeItem('access_token');
+                }
+            });
+        } else {
+            loginRegView();
+        }
+    }
+
+    function accountView() {
+        $('.column-display').html(`
+            <div class="container has-text-centered">
+                <h2 class="title">Account</h2>
+                <p class="subtitle is-6">This is the file account section for Bible Quest. Logging in here gives you
+                    access to any digital content for Bible Quest products that you own. If you have a new product
+                    that includes digital content, enter your product key precisely in the box below to activate
+                    your files and make them available to download. <span class="has-text-weight-bold">Please
+                        Note:</span> This "files account" is a separate account from the account that allows posting
+                    comments on the blog or in the forums. A separate log-in for these community resources will be
+                    required.</p>
+                <form class="addUserProduct" action="/addProductToUser">
+                    <div class="field">
+                        <label for="productCode" class="label">Enter Product Code</label>
+                        <div class="control">
+                            <input id="productCode" class="input" name='acode' type="text" placeholder="code">
+                        </div>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary">Submit</button>
+                    </div>
+                </form>
+                <h2 class='title'>Your products</h2>
+            </div>
+            <div class="container">
+                <article class="user_products">
+                </article>
+            </div>
+            <div class="container has-text-centered">
+                <h2 class="title">Contact</h2>
+        
+                <form action="email" method="post">
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input class="input" type="text" name="email_name" placeholder="Name">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" name="email_email" placeholder="Email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <textarea class="textarea" name="email_message" placeholder="Message us"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field is-horizontal">
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-primary has-text-white has-text-weight-bold">
+                                        Send message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>`
+
+        );
+    }
+
+    function loginRegView() {
+        $('.column-display').html(`
+            <div class="columns">
+                <div class="column is-6">
+                    <h1 class="title is-3">Register</h1>
+                    <form id="register" class="formToReset" action="/registerCustomer" method="post">
+                        <div class="field">
+                            <label for="registerName" class="label">Name</label>
+                            <div class="control">
+                                <input id="registerName" name="rname" class="input" type="text" placeholder="Name">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerEmail" class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input id="registerEmail" name="remail" class="input" type="email"
+                                    placeholder="Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerPhoneNumber" class="label">Phone Number</label>
+                            <div class="control">
+                                <input id="registerPhoneNumber" name="rphone_number" class="input" type="text"
+                                    placeholder="xxx-xxx-xxxx">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerAddress" class="label">Address</label>
+                            <div class="control">
+                                <input id="registerAddress" name="raddress" class="input" type="text"
+                                    placeholder="Address">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registercity" class="label">City</label>
+                            <div class="control">
+                                <input id="registercity" name="rcity" class="input" type="text"
+                                    placeholder="Enter a City">
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="field column is-one-thirds">
+                                <label for="registerState" class="label">State</label>
+                                <div class="control">
+                                    <select id="registerState" name="rstate" class="input">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="field column is-one-thirds">
+                                <label for="registerZip" class="label">Zip Code</label>
+                                <div class="control">
+                                    <input id="registerZip" name="rzip" class="input" type="number"
+                                        placeholder="Zip Code">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerPassword" class="label">Password</label>
+                            <div class="control">
+                                <input id="registerPassword" name="rpassword" class="input" type="password"
+                                    placeholder="Enter a Password">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerConfirm_password" class="label">Confirm Password</label>
+                            <div class="control">
+                                <input id="registerConfirm_password" name="rconfirm_password" class="input"
+                                    type="password" placeholder="Please re-enter password">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="registerPurpose" class="label">How will you use our product?</label>
+                            <div class="control">
+                                <select id="registerPurpose" name="rpurpose" class="input">
+                                    <option selected disabled>Choose an option</option>
+                                    <option value="1">Home</option>
+                                    <option value="2">Church</option>
+                                    <option value="3">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="column is-6">
+                    <h1 class="title is-3">Login</h1>
+                    <form id="login" class="formToReset" action="/loginCustomer" method="post">
+                        <div class="field">
+                            <label for="loginEmail" class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input id="loginEmail" name="lemail" class="input" type="email" placeholder="Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="loginPassword" class="label">Password</label>
+                            <div class="control">
+                                <input id="loginPassword" name="lpassword" class="input" type="password"
+                                    placeholder="Enter Password">
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>`);
     }
 });

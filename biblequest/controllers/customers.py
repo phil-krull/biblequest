@@ -3,6 +3,7 @@ from biblequest.models.customer import Customer
 from biblequest.models.address import Address
 from biblequest.models.role import Role
 from biblequest.models.code import Code
+from biblequest.config.cjwt import current_identity
 
 customer = Customer()
 address = Address()
@@ -14,8 +15,8 @@ class Customers():
     def index(self):
         return render_template('index.html')
 
-    def register(self):
-        pass
+    # def register(self):
+    #     pass
 
     def register_customer(self, form_data):
         # 1. validate new customer info
@@ -30,6 +31,8 @@ class Customers():
         user_role = role.get_role()
         # 4. create and retrieve customer id(need role id, customer data)
         customer_id = customer.create_user(user_role, form_data)
+        print('-test-'*20)
+        print(customer_id)
         # print('-'*90)
         # print(customer_id)
         # 5. create customer address (need customer id, address data)
@@ -74,17 +77,24 @@ class Customers():
         pass
 
     def users_page(self):
-        if 'user_id' in session:
-            user_products = code.get_user_products(session['user_id'])
-            return jsonify({'status': True, 'message': 'Is user', 'products': user_products})
-        else:
-            return jsonify({'status': False})
+        print('@'*50)
+        print(current_identity)
+        # if 'user_id' in session:
+        #     user_products = code.get_user_products(session['user_id'])
+        #     return jsonify({'status': True, 'message': 'Is user', 'products': user_products})
+        # else:
+        #     return jsonify({'status': False})
 
-    def logout(self):
-        session.clear()
-        return jsonify({'status': True, 'message': 'Successfully logged out'})
+        user_products = code.get_user_products(current_identity['customer_id'])
+        return jsonify({'status': True, 'message': 'Is user', 'products': user_products})
 
-    def edit_customer(self, user_id, post_data):
+    # def logout(self):
+    #     session.clear()
+    #     return jsonify({'status': True, 'message': 'Successfully logged out'})
+
+    def update_customer(self, post_data):
+        print('@'*50)
+        print(current_identity)
         result = customer.update_user_password(user_id, post_data)
         if result:
             resp = jsonify({'status': True, 'message': 'Password updated'})
